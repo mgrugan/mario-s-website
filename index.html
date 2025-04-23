@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mario Grugan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #eeebe3;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .navbar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .nav-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    nav {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+    }
+
+    .nav-left {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-right a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .spacer {
+      height: 80px;
+    }
+
+    .video-section {
+      background: black;
+      line-height: 0;
+    }
+
+    .video-section video {
+      width: 100%;
+      max-width: 1920px;
+      aspect-ratio: 16 / 9;
+      display: block;
+    }
+
+    .content {
+      padding: 60px 40px;
+    }
+
+    .projects-title {
+      text-align: center;
+      font-size: 28px;
+      margin: 40px 0 20px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto 60px;
+    }
+
+    .project-box {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+    }
+
+    .project-box img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .project-box:hover {
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar-wrapper">
+    <video id="navVideo" class="nav-video" muted autoplay playsinline>
+      <source src="background.mp4" type="video/mp4" />
+    </video>
+    <nav>
+      <div class="nav-left">Mario Grugan</div>
+      <div class="nav-right">
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="spacer"></div>
+
+  <section class="video-section">
+    <video id="bannerVideo" muted autoplay playsinline>
+      <source src="MARIO VIDEO.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <div class="content">
+    <h2 class="projects-title">Most Recent Projects</h2>
+    <div class="projects">
+      <a class="project-box" href="portfolio.html#hybrid">
+        <img src="25e.png" alt="Formula Hybrid Optimization" />
+      </a>
+      <a class="project-box" href="portfolio.html#chess">
+        <img src="CHESS-112.png" alt="AI Chess 112" />
+      </a>
+      <a class="project-box" href="portfolio.html#social">
+        <img src="Untitled design (51).png" alt="Social Media Analytics" />
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const navVideo = document.getElementById("navVideo");
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        navVideo.currentTime = 0;
+        navVideo.play();
+      });
+    });
+
+    const bannerVideo = document.getElementById("bannerVideo");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          bannerVideo.currentTime = 0;
+          bannerVideo.play();
+        } else {
+          bannerVideo.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(document.querySelector('.video-section'));
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact – Mario Grugan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      font-family: 'Montserrat', sans-serif;
+      color: #111;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .navbar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .nav-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    nav {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+    }
+
+    .nav-left {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-right a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .spacer {
+      height: 80px;
+    }
+
+    .form-wrapper {
+      max-width: 600px;
+      margin: 80px auto 40px;
+      padding: 0 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      background-color: #eeebe3;
+      border: 1px solid #aaa;
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 25px;
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .bottom-image-wrapper {
+      max-width: 600px;
+      margin: 40px auto 60px;
+      padding: 0 20px;
+    }
+
+    .bottom-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar-wrapper">
+    <video id="navVideo" class="nav-video" muted autoplay playsinline>
+      <source src="background.mp4" type="video/mp4" />
+    </video>
+    <nav>
+      <div class="nav-left">Mario Grugan</div>
+      <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="form-wrapper">
+    <form action="https://formsubmit.co/mgrugan@andrew.cmu.edu" method="POST">
+      <label for="name">Name <span style="font-weight: 300;">(required)</span></label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email <span style="font-weight: 300;">(required)</span></label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message"></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <div class="bottom-image-wrapper">
+    <img src="97CFE6E0-050B-4985-9E21-CA27F117FB2E.JPG" alt="Chess Game" class="bottom-image">
+  </div>
+
+  <script>
+    const navVideo = document.getElementById("navVideo");
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        navVideo.currentTime = 0;
+        navVideo.play();
+      });
+    });
+  </script>
+
+</body>
+</html>

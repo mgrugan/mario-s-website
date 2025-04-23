@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Portfolio – Mario Grugan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      font-family: 'Montserrat', sans-serif;
+      color: #111;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .navbar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .nav-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    nav {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 30px;
+    }
+
+    .nav-left {
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-right a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .spacer {
+      height: 80px;
+    }
+
+    .project-wrapper {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .project-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    .project-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .project-description {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .run-instructions {
+      background-color: #eeebe3;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .run-instructions h3 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    .github-link {
+      display: inline-block;
+      background-color: black;
+      color: white;
+      padding: 12px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 80px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar-wrapper">
+    <video id="navVideo" class="nav-video" muted autoplay playsinline>
+      <source src="background.mp4" type="video/mp4" />
+    </video>
+    <nav>
+      <div class="nav-left">Mario Grugan</div>
+      <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- Formula Hybrid Optimization -->
+  <div id="hybrid" class="project-wrapper">
+    <img src="25e.png" alt="Formula Hybrid" class="project-image" />
+    <h1 class="project-title">Formula Hybrid Optimization – CMR 25e</h1>
+    <p class="project-description">
+      This project analyzes Formula Hybrid and FSAE endurance data to optimize total scoring using lap time and energy usage as inputs. A custom R script models both efficiency and endurance scores to help optimize total performance tradeoffs between speed and energy draw.
+    </p>
+    <div class="run-instructions">
+      <h3>Run Instructions</h3>
+      <ul>
+        <li>Open the provided PDF</li>
+      </ul>
+    </div>
+    <a href="CMR Data (1).pdf" class="github-link" download>Download PDF</a>
+  </div>
+
+  <!-- Chess 112 -->
+  <div id="chess" class="project-wrapper">
+    <img src="CHESS-112.png" alt="Chess 112" class="project-image" />
+    <h1 class="project-title">AI Chess 112</h1>
+    <p class="project-description">
+      Created for CMU’s 15-112 class, this chess engine handles full rule logic (castling, checkmate, promotion) with an AI that prioritizes capturing high-value pieces. Built using `cmu_graphics` and accessible through a menu-driven interface.
+    </p>
+    <div class="run-instructions">
+      <h3>Run Instructions</h3>
+      <ul>
+        <li>Download the cmu_graphics package and place alongside code</li>
+        <li>Launch <code>Main_Menu.py</code> to navigate</li>
+        <li>Return to main menu at any time from within app</li>
+      </ul>
+    </div>
+    <a href="https://github.com/YOUR_USERNAME/chess-112" class="github-link" target="_blank">View on GitHub</a>
+  </div>
+
+  <!-- Social Media Analytics -->
+  <div id="social" class="project-wrapper">
+    <img src="Untitled design (51).png" alt="Social Media Analytics" class="project-image" />
+    <h1 class="project-title">Social Media Analytics</h1>
+    <p class="project-description">
+      Built in CMU's 15-110 course, this Python-based analysis explores bias and emotion in political Facebook and Twitter posts. Uses pandas, matplotlib, and NLTK to visualize trends by hashtag and account type.
+    </p>
+    <div class="run-instructions">
+      <h3>Run Instructions</h3>
+      <ul>
+        <li>Install required packages: pandas, matplotlib, nltk</li>
+        <li>Run <code>hw6_social.py</code></li>
+        <li>Call <code>runWeek1()</code>, <code>runWeek2()</code>, etc. for modular analysis</li>
+      </ul>
+    </div>
+    <a href="https://github.com/YOUR_USERNAME/social-media-analytics" class="github-link" target="_blank">View on GitHub</a>
+  </div>
+
+  <script>
+    const navVideo = document.getElementById("navVideo");
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        navVideo.currentTime = 0;
+        navVideo.play();
+      });
+    });
+  </script>
+
+</body>
+</html>
+
