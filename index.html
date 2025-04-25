@@ -18,7 +18,6 @@
       box-sizing: border-box;
     }
 
-
     .navbar-wrapper {
       position: fixed;
       top: 0;
@@ -33,21 +32,21 @@
       position: absolute;
       top: 0;
       left: 0;
-      height: 100%;
       width: 100%;
+      height: 100%;
       object-fit: cover;
-      z-index: -1;
+      z-index: 0;
       pointer-events: none;
     }
 
     nav {
+      position: relative;
+      z-index: 1;
+      height: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 80px;
       padding: 0 30px;
-      position: relative;
-      z-index: 2;
     }
 
     .nav-left {
@@ -72,6 +71,18 @@
       height: 80px;
     }
 
+    .video-section {
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+    }
+
+    .video-section video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     .section {
       padding: 60px 30px;
       text-align: center;
@@ -88,7 +99,6 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 30px;
-      margin-top: 20px;
     }
 
     .project-box {
@@ -116,7 +126,7 @@
 </head>
 <body>
 
-
+  <!-- Fixed Top Banner with Background Video -->
   <div class="navbar-wrapper">
     <video class="nav-video" autoplay muted loop playsinline>
       <source src="background.mp4" type="video/mp4" />
@@ -131,10 +141,18 @@
     </nav>
   </div>
 
-
+  <!-- Spacer to push content below fixed nav -->
   <div class="spacer"></div>
 
-  
+  <!-- Full-width Scrolling Video of Mario -->
+  <section class="video-section">
+    <video id="bannerVideo" autoplay muted playsinline>
+      <source src="MARIO VIDEO.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <!-- Projects Section -->
   <div class="section">
     <h1>Most Recent Projects</h1>
     <div class="project-grid">
@@ -152,4 +170,3 @@
 
 </body>
 </html>
-
