@@ -120,7 +120,7 @@
 </head>
 <body>
 
-  <!-- Banner with video and nav (scrolls like normal content) -->
+  <!-- Top banner (scrolls away like normal content) -->
   <div class="banner-wrapper">
     <video class="nav-video" autoplay muted loop playsinline>
       <source src="background.mp4" type="video/mp4" />
@@ -135,15 +135,15 @@
     </nav>
   </div>
 
-  <!-- Full-width Scrolling Video of Mario -->
+  <!-- Scrolling video section (MARIO VIDEO.mp4) -->
   <section class="video-section">
-    <video id="bannerVideo" autoplay muted playsinline>
+    <video id="bannerVideo" muted playsinline>
       <source src="MARIO VIDEO.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
   </section>
 
-  <!-- Projects Section -->
+  <!-- Projects -->
   <div class="section">
     <h1>Most Recent Projects</h1>
     <div class="project-grid">
@@ -159,6 +159,34 @@
     </div>
   </div>
 
+  <!-- Scripts -->
+  <script>
+    // Replay nav background video on page change
+    const navVideo = document.querySelector(".nav-video");
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        navVideo.currentTime = 0;
+        navVideo.play();
+      });
+    });
+
+    // Replay Mario video on scroll into view
+    const marioVideo = document.getElementById("bannerVideo");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          marioVideo.currentTime = 0;
+          marioVideo.play().catch(() => {});
+        } else {
+          marioVideo.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(marioVideo);
+  </script>
+
 </body>
 </html>
+
 
