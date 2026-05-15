@@ -5,188 +5,950 @@
   <title>Mario Grugan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="favicon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-color: white;
-      font-family: 'Montserrat', sans-serif;
+    :root {
+      --paper: #e8dfc9;
+      --paper-2: #ddd1b6;
+      --paper-deep: #cdbf9d;
+      --ink: #1a1612;
+      --ink-soft: #4a423a;
+      --muted: #8a7f70;
+      --rule: #c9bd9e;
+      --accent: #a85a1f;
+      --accent-bright: #d4843a;
+      --nav-h: 120px;
     }
 
-    * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background:
+        radial-gradient(ellipse at 50% 0%, #ede4cf 0%, #e2d8c1 40%, #cebf9e 100%);
+      background-attachment: fixed;
+      color: var(--ink);
+      font-family: 'Inter Tight', system-ui, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    .banner-wrapper {
-      width: 100%;
-      height: 80px;
-      position: relative;
+    /* Paper grain */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1;
+      opacity: 0.4; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0.1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+
+    /* Vignette darkening edges for dimensional depth */
+    body::after {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(40, 28, 14, 0.18) 80%, rgba(40, 28, 14, 0.35) 100%);
+    }
+
+    /* === NAV BAND with painting background === */
+    .nav-band {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 100;
       overflow: hidden;
+      border-bottom: 1px solid rgba(232, 160, 74, 0.3);
     }
 
-    .nav-video {
+    .nav-band-bg {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      inset: 0;
+      background-image: url("creation.png");
+      background-size: cover;
+      background-position: center 35%;
+      filter: contrast(1.05) saturate(1.05);
       z-index: 0;
+    }
+
+    /* Dark overlay for text legibility */
+    .nav-band::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg,
+          rgba(20, 14, 8, 0.55) 0%,
+          rgba(20, 14, 8, 0.35) 50%,
+          rgba(20, 14, 8, 0.65) 100%);
+      z-index: 1;
       pointer-events: none;
     }
 
-    nav {
+    .nav {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       height: 100%;
+      padding: 0 56px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 30px;
     }
 
-    .nav-left {
-      font-size: 20px;
-      font-weight: 700;
-      color: white;
-    }
-
-    .nav-right {
-      display: flex;
-      gap: 30px;
-    }
-
-    .nav-right a {
-      color: white;
+    .nav-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500; font-style: italic;
+      font-size: 32px; letter-spacing: -0.01em;
+      color: #f4efe6;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    }
+    .nav-mark .dot {
+      display: inline-block; width: 7px; height: 7px;
+      border-radius: 50%; background: var(--accent-bright);
+      margin: 0 12px 4px; vertical-align: middle;
+      box-shadow: 0 0 12px rgba(232, 160, 74, 0.8);
+    }
+    .nav-mark em { font-style: italic; }
+
+    .nav-links { display: flex; gap: 44px; }
+    .nav-links a {
+      color: #f4efe6;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: lowercase;
+      position: relative;
+      padding: 6px 2px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; bottom: 0;
+      width: 0; height: 1px; background: var(--accent-bright);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 6px rgba(232, 160, 74, 0.6);
+    }
+    .nav-links a:hover { color: var(--accent-bright); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Painting credit (bottom of nav band) */
+    .painting-credit {
+      position: absolute;
+      bottom: 8px; left: 56px;
+      z-index: 2;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.55);
+      font-family: 'Inter Tight', sans-serif;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
     }
 
-    .video-section {
-      margin: 0;
-      padding: 0;
-      line-height: 0;
+    .spacer { height: var(--nav-h); }
+
+    /* === HERO === */
+    .hero {
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 30px 56px 60px;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 480px 1fr;
+      gap: 40px;
+      align-items: center;
+      min-height: 560px;
     }
 
-    .video-section video {
+    .hero-left {
+      text-align: right;
+      padding-right: 20px;
+    }
+
+    .hero-meta {
+      display: flex; flex-direction: column;
+      gap: 6px; margin-bottom: 32px;
+      font-size: 12px; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      align-items: flex-end;
+    }
+    .hero-meta .accent { color: var(--accent); }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(56px, 8vw, 112px);
+      line-height: 0.92;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .hero-title em {
+      font-style: italic; font-weight: 400;
+      color: var(--accent);
+    }
+
+    /* === CENTRAL 3D === */
+    .hero-3d-wrap {
+      position: relative;
       width: 100%;
-      height: auto;
+      aspect-ratio: 1;
+      max-width: 480px;
+      filter: drop-shadow(0 20px 60px rgba(139, 58, 26, 0.45));
+    }
+
+    .hero-3d-wrap canvas {
+      width: 100%;
+      height: 100%;
       display: block;
     }
 
-    .section {
-      padding: 60px 30px;
+    /* Concentric glow halo */
+    .hero-3d-wrap::before {
+      content: "";
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 70%; height: 70%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(139, 58, 26, 0.22) 0%, rgba(139, 58, 26, 0.05) 45%, transparent 70%);
+      pointer-events: none;
+      animation: breathe 5s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes breathe {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.12); }
+    }
+
+    /* Decorative center label */
+    .hero-3d-label {
+      position: absolute;
+      bottom: -40px; left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .hero-right {
+      text-align: left;
+      padding-left: 20px;
+    }
+
+    .hero-sub {
+      max-width: 360px;
+      font-size: 17px; line-height: 1.6;
+      color: var(--ink-soft);
+      font-weight: 400;
+      margin-bottom: 30px;
+    }
+
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 12px;
+      color: var(--ink); text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 22px;
+      letter-spacing: -0.01em;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--ink);
+      transition: gap 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .hero-cta:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      gap: 20px;
+    }
+    .hero-cta .arrow { font-family: 'Inter Tight', sans-serif; font-style: normal; font-size: 18px; }
+
+    /* === SECTION === */
+    .section-head {
+      max-width: 900px;
+      margin: 100px auto 60px;
+      padding: 0 56px;
       text-align: center;
+      position: relative; z-index: 2;
     }
-
-    .section h1 {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 40px;
+    .section-head .label {
+      display: inline-block;
+      font-size: 12px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 24px;
     }
-
-    .project-grid {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
+    .section-head .label::before {
+      content: ""; display: inline-block;
+      width: 24px; height: 1px; background: var(--accent);
+      vertical-align: middle; margin-right: 14px;
     }
-
-    .project-box {
-      width: 250px;
-      height: 250px;
-      border: 2px solid #ccc;
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform 0.3s;
-      cursor: pointer;
-      background-color: #eeebe3;
+    .section-head .label::after {
+      content: ""; display: inline-block;
+      width: 24px; height: 1px; background: var(--accent);
+      vertical-align: middle; margin-left: 14px;
     }
-
-    .project-box:hover {
-      transform: scale(1.03);
-      border-color: black;
+    .section-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1.15; letter-spacing: -0.02em;
+      color: var(--ink);
     }
+    .section-head h2 em { font-style: italic; color: var(--accent); }
 
-    .project-box img {
-      width: 100%;
-      height: 100%;
+    /* === PROJECTS === */
+    .projects {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 56px 140px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      position: relative; z-index: 2;
+      perspective: 1200px;
+    }
+    .project {
+      text-decoration: none; color: inherit;
+      display: block; position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1);
+      will-change: transform;
+    }
+    .project-thumb {
+      aspect-ratio: 4 / 5;
+      background: #ede4cf;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative;
+      transition: background 0.6s ease, box-shadow 0.5s ease;
+      transform-style: preserve-3d;
+    }
+    .project-thumb img {
+      max-width: 70%; max-height: 70%;
       object-fit: contain;
-      background-color: #eeebe3;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      mix-blend-mode: multiply;
+      transform: translateZ(40px);
+    }
+    .project-thumb::after {
+      content: ""; position: absolute; inset: 14px;
+      border: 1px solid rgba(26, 22, 18, 0);
+      transform: translateZ(20px);
+      transition: border-color 0.5s ease;
+      pointer-events: none;
+    }
+    .project:hover .project-thumb {
+      background: #f5ecd5;
+      box-shadow: 0 30px 60px -25px rgba(26, 22, 18, 0.3), 0 15px 25px -15px rgba(168, 90, 31, 0.18);
+    }
+    .project:hover .project-thumb::after { border-color: rgba(196, 122, 58, 0.4); }
+    .project:hover .project-thumb img { transform: translateZ(60px) scale(1.05); }
+    .project-meta {
+      padding: 22px 4px 0;
+      display: flex; justify-content: space-between; align-items: baseline;
+      border-top: 1px solid var(--rule);
+    }
+    .project-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 15px;
+      color: var(--muted);
+    }
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      transition: color 0.3s;
+    }
+    .project:hover .project-title { color: var(--accent); }
+    .project-cat {
+      font-size: 11px; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: 14px; padding: 0 4px;
+    }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      max-width: 1400px; margin: 0 auto;
+      padding: 40px 56px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      position: relative; z-index: 2;
+    }
+    footer .mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 16px;
+      letter-spacing: 0; text-transform: none;
+      color: var(--ink-soft);
+    }
+
+    @media (max-width: 900px) {
+      :root { --nav-h: 90px; }
+      .nav { padding: 0 22px; }
+      .nav-mark { font-size: 22px; }
+      .nav-links { gap: 22px; }
+      .nav-links a { font-size: 11px; letter-spacing: 0.1em; }
+      .painting-credit { left: 22px; font-size: 9px; }
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 50px 22px 40px;
+        gap: 40px;
+        min-height: auto;
+      }
+      .hero-left, .hero-right { text-align: center; padding: 0; }
+      .hero-meta { align-items: center; }
+      .hero-sub { margin: 0 auto 30px; }
+      .hero-3d-wrap { max-width: 320px; margin: 0 auto; }
+      .section-head { padding: 0 22px; margin-top: 60px; }
+      .projects { grid-template-columns: 1fr; padding: 0 22px 80px; gap: 40px; perspective: none; }
+      .project-thumb { aspect-ratio: 4 / 3; }
+      footer { padding: 30px 22px; flex-direction: column; gap: 14px; }
+    }
+
+    .hero-meta, .hero-title, .hero-sub, .hero-cta, .hero-3d-wrap {
+      opacity: 0; transform: translateY(20px);
+      animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    }
+    .hero-meta { animation-delay: 1.0s; }
+    .hero-title { animation-delay: 1.15s; }
+    .hero-3d-wrap { animation-delay: 1.25s; }
+    .hero-sub { animation-delay: 1.4s; }
+    .hero-cta { animation-delay: 1.55s; }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================
+       INTRO LOAD SEQUENCE
+       ============================================ */
+
+    /* Painting fades and slightly zooms in */
+    .nav-band-bg {
+      opacity: 0;
+      transform: scale(1.08);
+      animation: paintingReveal 1.6s cubic-bezier(0.2, 0.6, 0.3, 1) 0.2s forwards;
+    }
+    @keyframes paintingReveal {
+      0%   { opacity: 0; transform: scale(1.08); }
+      100% { opacity: 1; transform: scale(1.0); }
+    }
+
+    /* Nav text itself fades in slightly after */
+    .nav-mark, .nav-links a, .painting-credit {
+      opacity: 0;
+      animation: navFade 0.8s ease 0.7s forwards;
+    }
+    .nav-links a:nth-child(1) { animation-delay: 0.85s; }
+    .nav-links a:nth-child(2) { animation-delay: 0.95s; }
+    .nav-links a:nth-child(3) { animation-delay: 1.05s; }
+    .nav-links a:nth-child(4) { animation-delay: 1.15s; }
+
+    @keyframes navFade {
+      to { opacity: 1; }
+    }
+
+    /* Construction grid overlay — Da Vinci-style guide lines */
+    .construction-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      animation: gridFade 0.8s ease 1.8s forwards;
+    }
+    .construction-grid svg {
+      width: 100%; height: 100%;
+      display: block;
+    }
+    .construction-grid svg path,
+    .construction-grid svg circle,
+    .construction-grid svg line {
+      fill: none;
+      stroke: #8b3a1a;
+      stroke-width: 0.8;
+      vector-effect: non-scaling-stroke;
+      stroke-dasharray: 1500;
+      stroke-dashoffset: 1500;
+      animation: drawLine 1.4s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+      opacity: 0.55;
+    }
+    .construction-grid svg .delay-1 { animation-delay: 0.05s; }
+    .construction-grid svg .delay-2 { animation-delay: 0.15s; }
+    .construction-grid svg .delay-3 { animation-delay: 0.25s; }
+    .construction-grid svg .delay-4 { animation-delay: 0.35s; }
+    .construction-grid svg .delay-5 { animation-delay: 0.45s; }
+    .construction-grid svg circle {
+      stroke-dasharray: 2200;
+      stroke-dashoffset: 2200;
+    }
+
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes gridFade {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* Convergence circles — inside the hero-3d-wrap, aligned with the 3D sphere */
+    .sphere-construction {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 5; /* above the canvas during reveal */
+      pointer-events: none;
+      animation: gridFade 0.9s ease 2.25s forwards;
+    }
+    .sphere-construction circle,
+    .sphere-construction line {
+      fill: none;
+      stroke: #8b3a1a;
+      stroke-width: 0.8;
+      vector-effect: non-scaling-stroke;
+      stroke-dasharray: 400;
+      stroke-dashoffset: 400;
+      animation: drawLine 1.3s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+      opacity: 0.55;
+    }
+    /* Outer convergence circle starts last so it's the most prominent at the moment of merge */
+    .sphere-construction .conv-cross { animation-delay: 0.35s; opacity: 0.4; }
+    .sphere-construction .conv-inner { animation-delay: 0.55s; opacity: 0.6; }
+    .sphere-construction .conv-outer { animation-delay: 0.75s; opacity: 0.7; }
+
+    /* Spark flash across "Grugan" headline as intro completes */
+    .hero-title em {
+      position: relative;
+      display: inline-block;
+    }
+    .hero-title em::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -30%;
+      width: 30%; height: 100%;
+      background: linear-gradient(120deg,
+        transparent 0%,
+        rgba(255, 215, 130, 0) 30%,
+        rgba(255, 215, 130, 0.85) 50%,
+        rgba(255, 215, 130, 0) 70%,
+        transparent 100%);
+      opacity: 0;
+      animation: spark 1.2s cubic-bezier(0.3, 0.6, 0.3, 1) 1.95s forwards;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    @keyframes spark {
+      0%   { opacity: 0; left: -30%; }
+      30%  { opacity: 1; }
+      100% { opacity: 0; left: 130%; }
+    }
+
+    /* The 3D wireframe's intro grow is handled in JS via group.scale */
+
+    /* Respect reduced-motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .construction-grid,
+      .sphere-construction,
+      .hero-title em::before { display: none; }
+      .nav-band-bg,
+      .nav-mark, .nav-links a, .painting-credit,
+      .hero-meta, .hero-title, .hero-sub, .hero-cta, .hero-3d-wrap {
+        opacity: 1;
+        transform: none;
+        animation: none;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top banner (scrolls away like normal content) -->
-  <div class="banner-wrapper">
-    <video class="nav-video" autoplay muted loop playsinline>
-      <source src="background.mp4" type="video/mp4" />
-    </video>
-    <nav>
-      <div class="nav-left">Mario Grugan</div>
-      <div class="nav-right">
-        <a href="about.html">About</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="contact.html">Contact</a>
+  <!-- Intro: construction grid that draws itself and fades out -->
+  <div class="construction-grid" aria-hidden="true">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Diagonal guide lines from corners -->
+      <line class="delay-1" x1="0" y1="0" x2="100" y2="100" />
+      <line class="delay-1" x1="100" y1="0" x2="0" y2="100" />
+
+      <!-- Rule of thirds vertical lines -->
+      <line class="delay-2" x1="33.3" y1="0" x2="33.3" y2="100" />
+      <line class="delay-2" x1="66.6" y1="0" x2="66.6" y2="100" />
+
+      <!-- Rule of thirds horizontal lines -->
+      <line class="delay-3" x1="0" y1="33.3" x2="100" y2="33.3" />
+      <line class="delay-3" x1="0" y1="66.6" x2="100" y2="66.6" />
+
+      <!-- Golden ratio vertical -->
+      <line class="delay-4" x1="61.8" y1="0" x2="61.8" y2="100" />
+      <line class="delay-4" x1="38.2" y1="0" x2="38.2" y2="100" />
+    </svg>
+  </div>
+
+  <header class="nav-band">
+    <div class="nav-band-bg"></div>
+    <nav class="nav">
+      <a href="index.html" class="nav-mark">Mario<span class="dot"></span><em>Grugan</em></a>
+      <div class="nav-links">
+        <a href="index.html">home</a>
+        <a href="about.html">about</a>
+        <a href="portfolio.html">work</a>
+        <a href="contact.html">contact</a>
       </div>
     </nav>
-  </div>
+    <div class="painting-credit">Michelangelo · Creation of Adam · c. 1512</div>
+  </header>
 
-  <!-- Scrolling video section (MARIO VIDEO.mp4) -->
-  <section class="video-section">
-    <video id="bannerVideo" muted playsinline>
-      <source src="MARIO VIDEO.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+  <div class="spacer"></div>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-meta">
+        <span class="accent">Portfolio — 2026</span>
+        <span>Carnegie Mellon · Pittsburgh, PA</span>
+      </div>
+      <h1 class="hero-title">
+        Mario<br/>
+        <em>Grugan</em>
+      </h1>
+    </div>
+
+    <div class="hero-3d-wrap">
+      <!-- Construction convergence circles — align exactly with the 3D sphere's orbital ring and outer hull -->
+      <svg class="sphere-construction" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle class="conv-outer" cx="50" cy="50" r="49" />
+        <circle class="conv-inner" cx="50" cy="50" r="36" />
+        <!-- Crosshair through center -->
+        <line class="conv-cross" x1="0"  y1="50" x2="100" y2="50" />
+        <line class="conv-cross" x1="50" y1="0"  x2="50"  y2="100" />
+      </svg>
+      <canvas id="sparkCanvas"></canvas>
+      <div class="hero-3d-label">— a study in data —</div>
+    </div>
+
+    <div class="hero-right">
+      <p class="hero-sub">
+        Statistics and Data Science at Carnegie Mellon. Working at the intersection of data, and audience from social networks of 15 million to machine learning.
+      </p>
+      <a href="portfolio.html" class="hero-cta">
+        View selected work <span class="arrow">→</span>
+      </a>
+    </div>
   </section>
 
-  <!-- Projects -->
-  <div class="section">
-    <h1>Most Recent Projects</h1>
-    <div class="project-grid">
-      <div class="project-box" onclick="location.href='portfolio.html#hybrid'">
-        <img src="25e.png" alt="Hybrid Project" />
-      </div>
-      <div class="project-box" onclick="location.href='portfolio.html#chess'">
-        <img src="CHESS-112.png" alt="Chess AI Project" />
-      </div>
-      <div class="project-box" onclick="location.href='portfolio.html#social'">
-        <img src="Untitled design (51).png" alt="Social Analysis" />
-      </div>
-    </div>
+  <div class="section-head">
+    <div class="label">Selected Work</div>
+    <h2>Three studies in <em>data</em>, motion, and language.</h2>
   </div>
 
-  <!-- Scripts -->
+  <div class="projects">
+    <a class="project" href="portfolio.html#hybrid">
+      <div class="project-thumb"><img src="25e.png" alt="Formula Hybrid 25e" /></div>
+      <div class="project-meta">
+        <span class="project-num">01 / Engineering</span>
+        <span class="project-title">Formula Hybrid</span>
+      </div>
+      <div class="project-cat">R · Regression · Optimization</div>
+    </a>
+
+    <a class="project" href="portfolio.html#chess">
+      <div class="project-thumb"><img src="CHESS-112.png" alt="AI Chess" /></div>
+      <div class="project-meta">
+        <span class="project-num">02 / Software</span>
+        <span class="project-title">AI Chess</span>
+      </div>
+      <div class="project-cat">Python · Game AI · cmu_graphics</div>
+    </a>
+
+    <a class="project" href="portfolio.html#social">
+      <div class="project-thumb"><img src="Untitled design (51).png" alt="Social Media Analytics" /></div>
+      <div class="project-meta">
+        <span class="project-num">03 / Analysis</span>
+        <span class="project-title">Social Signals</span>
+      </div>
+      <div class="project-cat">Python · NLTK · Sentiment</div>
+    </a>
+  </div>
+
+  <footer>
+    <span class="mark">Mario Grugan</span>
+    <span>© 2026 — All work shown</span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    // Replay nav background video on page change
-    const navVideo = document.querySelector(".nav-video");
-    document.querySelectorAll("nav a").forEach(link => {
-      link.addEventListener("click", () => {
-        navVideo.currentTime = 0;
-        navVideo.play();
+    /* ==========================================================
+       Interactive wireframe sphere with cursor-warping lines
+       ========================================================== */
+    (function() {
+      const canvas = document.getElementById('sparkCanvas');
+      if (!canvas || !window.THREE) return;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+      camera.position.set(0, 0, 8);
+
+      // Three distinct Renaissance pigments — varied hues, all readable on cream
+      const oxblood   = 0x8b3a1a;  // deep red ochre — outer wireframe
+      const verdigris = 0x3a5a4e;  // muted teal/green — inner wireframe
+      const ink       = 0x1a1612;  // near-black — rings and core
+      const goldDeep  = 0xa8742a;  // muted gold — dots and satellites
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      // ------- Build the wireframe icosahedron as INDEXED line geometry
+      // We extract unique edge vertices, store rest positions, and animate
+      // each vertex toward the cursor independently. The centroid stays put.
+
+      const ico = new THREE.IcosahedronGeometry(1.5, 2);
+      const wireframe = new THREE.WireframeGeometry(ico);
+      const wirePos = wireframe.attributes.position.array;
+      const vertexCount = wirePos.length / 3;
+
+      // Rest positions (we never modify these — they're the "magnet at rest" state)
+      const restPositions = new Float32Array(wirePos);
+      // Current positions (we mutate these every frame)
+      const currentPositions = new Float32Array(wirePos);
+
+      const lineGeom = new THREE.BufferGeometry();
+      lineGeom.setAttribute('position', new THREE.BufferAttribute(currentPositions, 3));
+
+      const lines = new THREE.LineSegments(
+        lineGeom,
+        new THREE.LineBasicMaterial({ color: oxblood, transparent: true, opacity: 0.95 })
+      );
+      group.add(lines);
+
+      // ------- Inner denser sphere (also warps)
+      const innerIco = new THREE.IcosahedronGeometry(0.85, 3);
+      const innerWire = new THREE.WireframeGeometry(innerIco);
+      const innerRest = new Float32Array(innerWire.attributes.position.array);
+      const innerCurrent = new Float32Array(innerWire.attributes.position.array);
+
+      const innerGeom = new THREE.BufferGeometry();
+      innerGeom.setAttribute('position', new THREE.BufferAttribute(innerCurrent, 3));
+      const innerLines = new THREE.LineSegments(
+        innerGeom,
+        new THREE.LineBasicMaterial({ color: verdigris, transparent: true, opacity: 0.75 })
+      );
+      group.add(innerLines);
+
+      // ------- Orbital rings (don't warp, just rotate)
+      const ring1 = new THREE.Mesh(
+        new THREE.RingGeometry(2.05, 2.058, 128),
+        new THREE.MeshBasicMaterial({ color: ink, side: THREE.DoubleSide, transparent: true, opacity: 0.9 })
+      );
+      group.add(ring1);
+
+      const ring2 = new THREE.Mesh(
+        new THREE.RingGeometry(2.05, 2.055, 128),
+        new THREE.MeshBasicMaterial({ color: oxblood, side: THREE.DoubleSide, transparent: true, opacity: 0.7 })
+      );
+      ring2.rotation.x = Math.PI / 2.4;
+      group.add(ring2);
+
+      const ring3 = new THREE.Mesh(
+        new THREE.RingGeometry(2.05, 2.054, 128),
+        new THREE.MeshBasicMaterial({ color: goldDeep, side: THREE.DoubleSide, transparent: true, opacity: 0.6 })
+      );
+      ring3.rotation.y = Math.PI / 2;
+      group.add(ring3);
+
+      // ------- Scattered data points (Fibonacci sphere)
+      const dotCount = 80;
+      const dotGeom = new THREE.BufferGeometry();
+      const dotPos = new Float32Array(dotCount * 3);
+      for (let i = 0; i < dotCount; i++) {
+        const phi = Math.acos(1 - 2 * (i + 0.5) / dotCount);
+        const theta = Math.PI * (1 + Math.sqrt(5)) * i;
+        const r = 1.5;
+        dotPos[i*3]   = r * Math.cos(theta) * Math.sin(phi);
+        dotPos[i*3+1] = r * Math.sin(theta) * Math.sin(phi);
+        dotPos[i*3+2] = r * Math.cos(phi);
+      }
+      dotGeom.setAttribute('position', new THREE.BufferAttribute(dotPos, 3));
+      const dots = new THREE.Points(
+        dotGeom,
+        new THREE.PointsMaterial({ color: goldDeep, size: 0.07, transparent: true, opacity: 0.95 })
+      );
+      group.add(dots);
+
+      // ------- Orbiting satellites
+      const sat1 = new THREE.Mesh(
+        new THREE.SphereGeometry(0.09, 16, 16),
+        new THREE.MeshBasicMaterial({ color: goldDeep })
+      );
+      const sat2 = new THREE.Mesh(
+        new THREE.SphereGeometry(0.06, 16, 16),
+        new THREE.MeshBasicMaterial({ color: oxblood })
+      );
+      group.add(sat1, sat2);
+
+      // ------- Sizing
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        const w = rect.width, h = rect.height;
+        if (w === 0 || h === 0) return;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      // ------- Cursor tracking in canvas-local coords
+      // We project mouse into the group's local coordinate space.
+      const mouseLocal = new THREE.Vector3(999, 999, 0); // far away by default
+      let mouseActive = false;
+
+      function updateMouse(clientX, clientY) {
+        const rect = canvas.getBoundingClientRect();
+        // Normalize to clip space [-1, 1]
+        const nx = ((clientX - rect.left) / rect.width) * 2 - 1;
+        const ny = -((clientY - rect.top) / rect.height) * 2 + 1;
+        // Unproject to a point on the z=0 plane in world space
+        // We use the camera's perspective: at z=0, x range maps to roughly tan(fov/2) * |cam.z|
+        const dist = camera.position.z;
+        const vFov = (camera.fov * Math.PI) / 180;
+        const heightAtZ0 = 2 * Math.tan(vFov / 2) * dist;
+        const widthAtZ0 = heightAtZ0 * camera.aspect;
+        mouseLocal.set(nx * widthAtZ0 / 2, ny * heightAtZ0 / 2, 0);
+      }
+
+      canvas.addEventListener('mousemove', (e) => {
+        updateMouse(e.clientX, e.clientY);
+        mouseActive = true;
+      });
+      canvas.addEventListener('mouseleave', () => {
+        mouseActive = false;
+      });
+      // Also track mouse over the surrounding hero area for a softer reach
+      const heroWrap = document.querySelector('.hero-3d-wrap');
+      heroWrap.addEventListener('mousemove', (e) => {
+        updateMouse(e.clientX, e.clientY);
+        mouseActive = true;
+      });
+      heroWrap.addEventListener('mouseleave', () => {
+        mouseActive = false;
+      });
+
+      // ------- Warp logic: pull each vertex toward the mouse, but with falloff
+      // Influence radius and strength. We need to convert the *world* mouse to
+      // the *local* (group-rotated) frame because the group rotates each frame.
+      const tempMouseLocal = new THREE.Vector3();
+      const inverseQuat = new THREE.Quaternion();
+      const tempVert = new THREE.Vector3();
+
+      function warpVertices(restArr, currArr, attribute) {
+        // Transform mouse from world into group-local space (inverse of group rotation)
+        inverseQuat.copy(group.quaternion).invert();
+        tempMouseLocal.copy(mouseLocal).sub(group.position).applyQuaternion(inverseQuat);
+
+        const influence = mouseActive ? 1.0 : 0.0;
+        const radius = 2.5;          // how far the magnet reaches
+        const maxPull = 0.45;         // max displacement of a vertex
+        const lerpSpeed = 0.12;       // smooth approach to target
+
+        for (let i = 0; i < restArr.length; i += 3) {
+          const rx = restArr[i], ry = restArr[i+1], rz = restArr[i+2];
+
+          // Vector from vertex (rest) to mouse (in local space)
+          const dx = tempMouseLocal.x - rx;
+          const dy = tempMouseLocal.y - ry;
+          const dz = tempMouseLocal.z - rz;
+          const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+
+          // Falloff: 1 at center, 0 beyond radius
+          let pull = 0;
+          if (dist < radius && influence > 0) {
+            const t = 1 - dist / radius;
+            pull = t * t * maxPull * influence;
+          }
+
+          // Target position = rest + pull toward mouse
+          let tx = rx, ty = ry, tz = rz;
+          if (pull > 0 && dist > 0.001) {
+            tx = rx + (dx / dist) * pull;
+            ty = ry + (dy / dist) * pull;
+            tz = rz + (dz / dist) * pull;
+          }
+
+          // Smooth lerp toward target
+          currArr[i]   += (tx - currArr[i])   * lerpSpeed;
+          currArr[i+1] += (ty - currArr[i+1]) * lerpSpeed;
+          currArr[i+2] += (tz - currArr[i+2]) * lerpSpeed;
+        }
+        attribute.needsUpdate = true;
+      }
+
+      // ------- Animate
+      group.rotation.x = -0.15;
+      // Start the group invisibly small for the intro reveal
+      group.scale.setScalar(0.0);
+      const introStart = performance.now() + 1250; // sync with .hero-3d-wrap rise delay (1.25s)
+      const introDuration = 1100; // 1.1s for the assemble-in
+      let introComplete = false;
+
+      let t = 0;
+      function tick() {
+        t += 0.004;
+
+        // === Intro scale-up ===
+        if (!introComplete) {
+          const now = performance.now();
+          if (now < introStart) {
+            group.scale.setScalar(0.0);
+          } else {
+            const p = Math.min((now - introStart) / introDuration, 1);
+            // easeOutBack-ish: overshoots slightly then settles
+            const eased = 1 + (Math.pow(p - 1, 3));
+            const overshoot = p < 1 ? eased + Math.sin(p * Math.PI) * 0.05 : 1;
+            group.scale.setScalar(overshoot);
+            if (p >= 1) { group.scale.setScalar(1); introComplete = true; }
+          }
+        }
+
+        // Rotation of the whole group (centroid does not move)
+        // During intro, spin faster for a "summoning" feel
+        const rotSpeed = introComplete ? 0.4 : 1.6;
+        group.rotation.y = t * rotSpeed;
+
+        // Satellites orbit
+        sat1.position.x = Math.cos(t * 1.2) * 2.05;
+        sat1.position.z = Math.sin(t * 1.2) * 2.05;
+        sat2.position.x = Math.cos(t * 1.5 + 2) * 2.05;
+        sat2.position.y = Math.sin(t * 1.5 + 2) * 2.05 * 0.5;
+
+        // Ring rotation
+        ring2.rotation.z = t * 0.3;
+        ring3.rotation.x = t * 0.2;
+
+        // Warp wireframes toward cursor
+        warpVertices(restPositions, currentPositions, lineGeom.attributes.position);
+        warpVertices(innerRest, innerCurrent, innerGeom.attributes.position);
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+    /* 3D TILT on project cards */
+    document.querySelectorAll('.project').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `rotateX(${-y * 8}deg) rotateY(${x * 10}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
       });
     });
-
-    // Replay Mario video on scroll into view
-    const marioVideo = document.getElementById("bannerVideo");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          marioVideo.currentTime = 0;
-          marioVideo.play().catch(() => {});
-        } else {
-          marioVideo.pause();
-        }
-      });
-    }, { threshold: 0.5 });
-
-    observer.observe(marioVideo);
   </script>
 
 </body>
 </html>
-
-
