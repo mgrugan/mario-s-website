@@ -2,208 +2,633 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Portfolio – Mario Grugan</title>
+  <title>Work — Mario Grugan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="favicon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-color: white;
-      font-family: 'Montserrat', sans-serif;
-      color: #111;
+    :root {
+      --paper: #e8dfc9;
+      --paper-2: #ddd1b6;
+      --paper-deep: #cdbf9d;
+      --ink: #1a1612;
+      --ink-soft: #4a423a;
+      --muted: #8a7f70;
+      --rule: #c9bd9e;
+      --accent: #a85a1f;
+      --accent-bright: #d4843a;
+      --nav-h: 120px;
     }
 
-    * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background:
+        radial-gradient(ellipse at 50% 0%, #ede4cf 0%, #e2d8c1 40%, #cebf9e 100%);
+      background-attachment: fixed;
+      color: var(--ink);
+      font-family: 'Inter Tight', system-ui, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    .navbar-wrapper {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 80px;
-      z-index: 1000;
-      overflow: hidden;
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1;
+      opacity: 0.4; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0.1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
     }
 
-    .nav-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    body::after {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(40, 28, 14, 0.18) 80%, rgba(40, 28, 14, 0.35) 100%);
+    }
+
+    .nav-band {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 100; overflow: hidden;
+      border-bottom: 1px solid rgba(232, 160, 74, 0.3);
+    }
+    .nav-band-bg {
+      position: absolute; inset: 0;
+      background-image: url("battle.png");
+      background-size: cover;
+      background-position: center 45%;
+      filter: contrast(1.05) saturate(1.0);
       z-index: 0;
-      pointer-events: none;
     }
+    .nav-band::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(20,14,8,0.55) 0%, rgba(20,14,8,0.35) 50%, rgba(20,14,8,0.65) 100%);
+      z-index: 1; pointer-events: none;
+    }
+    .nav {
+      position: relative; z-index: 2;
+      height: 100%; padding: 0 56px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500; font-style: italic;
+      font-size: 32px; letter-spacing: -0.01em;
+      color: #f4efe6; text-decoration: none;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    }
+    .nav-mark .dot {
+      display: inline-block; width: 7px; height: 7px;
+      border-radius: 50%; background: var(--accent-bright);
+      margin: 0 12px 4px; vertical-align: middle;
+      box-shadow: 0 0 12px rgba(232, 160, 74, 0.8);
+    }
+    .nav-links { display: flex; gap: 44px; }
+    .nav-links a {
+      color: #f4efe6; text-decoration: none;
+      font-size: 14px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: lowercase;
+      position: relative; padding: 6px 2px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; bottom: 0;
+      width: 0; height: 1px; background: var(--accent-bright);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 6px rgba(232, 160, 74, 0.6);
+    }
+    .nav-links a:hover { color: var(--accent-bright); }
+    .nav-links a:hover::after { width: 100%; }
+    .painting-credit {
+      position: absolute; bottom: 8px; left: 56px; z-index: 2;
+      font-size: 10px; letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.55);
+      font-family: 'Inter Tight', sans-serif;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+    }
+    .spacer { height: var(--nav-h); }
 
-    nav {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
+    .page-head {
+      max-width: 1400px; margin: 0 auto;
+      padding: 80px 56px 50px;
+      display: grid;
+      grid-template-columns: 1fr 380px 1fr;
+      gap: 40px;
       align-items: center;
-      padding: 0 30px;
+      min-height: 500px;
+      position: relative; z-index: 2;
+    }
+    .page-head-left { text-align: right; padding-right: 20px; }
+    .page-meta {
+      font-size: 12px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .page-meta::after {
+      content: ""; display: inline-block;
+      width: 24px; height: 1px; background: var(--accent);
+      vertical-align: middle; margin-left: 14px;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: 0.95; letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .page-title em { font-style: italic; color: var(--accent); }
+
+    .page-3d-wrap {
+      position: relative;
+      width: 100%; aspect-ratio: 1;
+      max-width: 380px;
+      filter: drop-shadow(0 16px 50px rgba(139, 58, 26, 0.4));
+    }
+    .page-3d-wrap canvas { width: 100%; height: 100%; display: block; }
+    .page-3d-wrap::before {
+      content: "";
+      position: absolute; top: 50%; left: 50%;
+      width: 70%; height: 70%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(139, 58, 26, 0.22) 0%, rgba(139, 58, 26, 0.05) 45%, transparent 70%);
+      pointer-events: none;
+      animation: breathe 5s ease-in-out infinite;
+      z-index: -1;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.12); }
     }
 
-    .nav-left {
-      font-size: 20px;
-      font-weight: 700;
-      color: white;
+    .page-head-right { padding-left: 20px; }
+    .page-head-right .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 20px;
+      color: var(--ink-soft); line-height: 1.4;
+      max-width: 280px;
     }
 
-    .nav-right {
-      display: flex;
-      gap: 30px;
+    /* === PROJECTS === */
+    .project {
+      max-width: 1400px; margin: 0 auto;
+      padding: 80px 56px;
+      border-top: 1px solid var(--rule);
+      position: relative; z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 7fr;
+      gap: 60px;
+    }
+    .project:first-of-type { padding-top: 60px; }
+
+    .project-side {
+      position: sticky; top: calc(var(--nav-h) + 30px);
+      align-self: start;
+      font-size: 12px;
+    }
+    .project-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 22px;
+      color: var(--accent); margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    .meta-block { margin-bottom: 22px; }
+    .meta-label {
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); font-size: 11px;
+      margin-bottom: 6px;
+    }
+    .meta-value {
+      color: var(--ink); font-size: 14px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .meta-value.serif {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; font-style: italic;
     }
 
-    .nav-right a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
+    .project-main { min-width: 0; perspective: 1500px; }
+    .project-image-wrap {
+      background: #ede4cf;
+      aspect-ratio: 16 / 10;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      margin-bottom: 40px; padding: 40px;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1),
+                  box-shadow 0.6s ease;
+      will-change: transform;
     }
-
-    .spacer {
-      height: 80px;
+    .project-image-wrap img {
+      max-width: 100%; max-height: 100%;
+      object-fit: contain; mix-blend-mode: multiply;
+      transform: translateZ(50px);
+      transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
     }
-
-    .project-wrapper {
-      max-width: 960px;
-      margin: 40px auto;
-      padding: 0 20px;
+    .project-image-wrap:hover {
+      box-shadow: 0 40px 80px -30px rgba(26, 22, 18, 0.3), 0 20px 40px -20px rgba(196, 122, 58, 0.2);
     }
-
-    .project-image {
-      width: 100%;
-      max-height: 400px;
-      object-fit: contain;
-      border-radius: 15px;
-      margin-bottom: 20px;
-    }
+    .project-image-wrap:hover img { transform: translateZ(80px); }
 
     .project-title {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(40px, 5.5vw, 72px);
+      line-height: 1; letter-spacing: -0.025em;
+      color: var(--ink); margin-bottom: 30px;
+    }
+    .project-title em { font-style: italic; color: var(--accent); }
+
+    .project-body {
+      max-width: 720px;
+      font-size: 17px; line-height: 1.65;
+      color: var(--ink-soft); margin-bottom: 40px;
+    }
+    .project-body p { margin-bottom: 18px; }
+    .project-body strong { color: var(--ink); font-weight: 500; }
+    .project-body em { color: var(--ink); font-style: italic; }
+    .project-body code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      background: rgba(196,122,58,0.12);
+      padding: 2px 6px; color: var(--accent);
     }
 
-    .project-description {
-      font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 30px;
+    .runbox {
+      max-width: 720px;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 24px 0; margin-bottom: 40px;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 40px; align-items: start;
+    }
+    .runbox-label {
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      padding-top: 2px;
+    }
+    .runbox ol { list-style: none; counter-reset: step; padding: 0; }
+    .runbox li {
+      counter-increment: step;
+      font-size: 15px; line-height: 1.55;
+      color: var(--ink-soft);
+      padding: 6px 0 6px 36px;
+      position: relative;
+    }
+    .runbox li::before {
+      content: counter(step, decimal-leading-zero);
+      position: absolute; left: 0; top: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .runbox li code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      background: rgba(196,122,58,0.12);
+      padding: 2px 6px; color: var(--accent);
     }
 
-    .run-instructions {
-      background-color: #eeebe3;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 30px;
+    .action {
+      display: inline-flex; align-items: center; gap: 12px;
+      color: var(--ink); text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 22px;
+      letter-spacing: -0.01em;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--ink);
+      transition: gap 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .action:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      gap: 18px;
+    }
+    .action .arrow {
+      font-family: 'Inter Tight', sans-serif;
+      font-style: normal; font-size: 18px;
     }
 
-    .run-instructions h3 {
-      margin-top: 0;
-      font-size: 18px;
+    footer {
+      border-top: 1px solid var(--rule);
+      max-width: 1400px; margin: 0 auto;
+      padding: 40px 56px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      position: relative; z-index: 2;
+    }
+    footer .mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 16px;
+      letter-spacing: 0; text-transform: none;
+      color: var(--ink-soft);
     }
 
-    .github-link {
-      display: inline-block;
-      background-color: black;
-      color: white;
-      padding: 12px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: 600;
-      font-size: 16px;
-      margin-bottom: 80px;
+    @media (max-width: 900px) {
+      :root { --nav-h: 90px; }
+      .nav { padding: 0 22px; }
+      .nav-mark { font-size: 22px; }
+      .nav-links { gap: 22px; }
+      .nav-links a { font-size: 11px; letter-spacing: 0.1em; }
+      .painting-credit { left: 22px; font-size: 9px; }
+      .page-head {
+        grid-template-columns: 1fr;
+        padding: 50px 22px 30px;
+        gap: 30px; min-height: auto;
+      }
+      .page-head-left, .page-head-right { text-align: center; padding: 0; }
+      .page-3d-wrap { max-width: 260px; margin: 0 auto; }
+      .page-head-right .tagline { max-width: none; }
+      .project {
+        grid-template-columns: 1fr;
+        gap: 32px; padding: 50px 22px;
+      }
+      .project-side { position: static; }
+      .runbox { grid-template-columns: 1fr; gap: 14px; padding: 18px 0; }
+      .project-image-wrap { padding: 22px; }
+      .project-main { perspective: none; }
+      footer { padding: 30px 22px; flex-direction: column; gap: 14px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="navbar-wrapper">
-    <video id="navVideo" class="nav-video" muted autoplay playsinline>
-      <source src="background.mp4" type="video/mp4" />
-    </video>
-    <nav>
-      <div class="nav-left">Mario Grugan</div>
-      <div class="nav-right">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="contact.html">Contact</a>
+  <header class="nav-band">
+    <div class="nav-band-bg"></div>
+    <nav class="nav">
+      <a href="index.html" class="nav-mark">Mario<span class="dot"></span><em>Grugan</em></a>
+      <div class="nav-links">
+        <a href="index.html">home</a>
+        <a href="about.html">about</a>
+        <a href="portfolio.html">work</a>
+        <a href="contact.html">contact</a>
       </div>
     </nav>
-  </div>
+    <div class="painting-credit">Vasari · The Battle of Marciano · 1572</div>
+  </header>
 
   <div class="spacer"></div>
 
-  <!-- Formula Hybrid Optimization -->
-  <div id="hybrid" class="project-wrapper">
-    <img src="25e.png" alt="Formula Hybrid" class="project-image" />
-    <h1 class="project-title">Formula Hybrid Optimization – CMR 25e</h1>
-    <p class="project-description">
-      This project analyzes Formula Hybrid and FSAE endurance data to optimize total scoring using lap time and energy usage as inputs. A custom R script models both efficiency and endurance scores to help optimize total performance tradeoffs between speed and energy draw.
-    </p>
-    <div class="run-instructions">
-      <h3>Run Instructions</h3>
-      <ul>
-        <li>Open the provided PDF</li>
-      </ul>
+  <section class="page-head">
+    <div class="page-head-left">
+      <div class="page-meta">Work</div>
+      <h1 class="page-title">Selected <em>projects</em></h1>
     </div>
-    <a href="CMR Data (1).pdf" class="github-link" download>Download PDF</a>
-  </div>
-
-  <!-- Chess 112 -->
-  <div id="chess" class="project-wrapper">
-    <img src="CHESS-112.png" alt="Chess 112" class="project-image" />
-    <h1 class="project-title">AI Chess 112</h1>
-    <p class="project-description">
-      Created for CMU’s 15-112 class, this chess engine handles full rule logic (castling, checkmate, promotion) with an AI that prioritizes capturing high-value pieces. Built using `cmu_graphics` and accessible through a menu-driven interface.
-    </p>
-    <div class="run-instructions">
-      <h3>Run Instructions</h3>
-      <ul>
-        <li>Download the cmu_graphics package and place alongside code</li>
-        <li>Launch <code>Main_Menu.py</code> to navigate</li>
-        <li>Return to main menu at any time from within app</li>
-      </ul>
+    <div class="page-3d-wrap">
+      <canvas id="headerCanvas"></canvas>
     </div>
-    <a href="https://github.com/mgrugan/chess112" class="github-link" target="_blank">View on GitHub</a>
-  </div>
-
-  <!-- Social Media Analytics -->
-  <div id="social" class="project-wrapper">
-    <img src="Untitled design (51).png" alt="Social Media Analytics" class="project-image" />
-    <h1 class="project-title">Social Media Analytics</h1>
-    <p class="project-description">
-      Built in CMU's 15-110 course, this Python-based analysis explores bias and emotion in political Facebook and Twitter posts. Uses pandas, matplotlib, and NLTK to visualize trends by hashtag and account type.
-    </p>
-    <div class="run-instructions">
-      <h3>Run Instructions</h3>
-      <ul>
-        <li>Install required packages: pandas, matplotlib, nltk</li>
-        <li>Run <code>hw6_social.py</code></li>
-        <li>Call <code>runWeek1()</code>, <code>runWeek2()</code>, etc. for modular analysis</li>
-      </ul>
+    <div class="page-head-right">
+      <p class="tagline">Three projects in engineering, software, and <em>data analysis</em>.</p>
     </div>
-    <a href="https://github.com/mgrugan/15110-Social-Media-Analysis" class="github-link" target="_blank">View on GitHub</a>
-  </div>
+  </section>
 
+  <article id="hybrid" class="project">
+    <aside class="project-side">
+      <div class="project-num">— 01</div>
+      <div class="meta-block">
+        <div class="meta-label">Year</div>
+        <div class="meta-value">2025</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Discipline</div>
+        <div class="meta-value serif">Engineering</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Tools</div>
+        <div class="meta-value">R · lm() · optim()</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Context</div>
+        <div class="meta-value serif">Carnegie Mellon Racing</div>
+      </div>
+    </aside>
+    <div class="project-main">
+      <div class="project-image-wrap tilt-card">
+        <img src="25e.png" alt="Formula Hybrid 25e" />
+      </div>
+      <h2 class="project-title">Formula Hybrid <em>Optimization</em></h2>
+      <div class="project-body">
+        <p>An R-based study of Formula Hybrid and FSAE endurance data that models total scoring as a function of lap time and energy usage. Two linear models — one for efficiency, one for endurance — are combined into a single objective, then numerically optimized to find the lap time and energy draw that maximize total points.</p>
+        <p>The endurance model achieved <strong>R² = 0.988</strong>; the efficiency model was noisier but directionally clear. Useful as a planning tool for the team when deciding how to trade outright pace against energy budget.</p>
+      </div>
+      <div class="runbox">
+        <div class="runbox-label">To read</div>
+        <ol>
+          <li>Download the PDF and open in any reader. All code, output, and plots are inline.</li>
+        </ol>
+      </div>
+      <a href="CMR Data (1).pdf" class="action" download>Download PDF <span class="arrow">↓</span></a>
+    </div>
+  </article>
+
+  <article id="chess" class="project">
+    <aside class="project-side">
+      <div class="project-num">— 02</div>
+      <div class="meta-block"><div class="meta-label">Year</div><div class="meta-value">2023</div></div>
+      <div class="meta-block"><div class="meta-label">Discipline</div><div class="meta-value serif">Software · Game AI</div></div>
+      <div class="meta-block"><div class="meta-label">Tools</div><div class="meta-value">Python · cmu_graphics</div></div>
+      <div class="meta-block"><div class="meta-label">Context</div><div class="meta-value serif">CMU 15-112</div></div>
+    </aside>
+    <div class="project-main">
+      <div class="project-image-wrap tilt-card"><img src="CHESS-112.png" alt="AI Chess" /></div>
+      <h2 class="project-title">AI <em>Chess</em></h2>
+      <div class="project-body">
+        <p>A full chess engine built from scratch for CMU's 15-112 course. Handles the complete rule set — castling, en passant, promotion, check, checkmate, and stalemate — with an AI opponent that prioritizes capturing high-value pieces. Built on <code>cmu_graphics</code> with a menu-driven interface.</p>
+      </div>
+      <div class="runbox">
+        <div class="runbox-label">To run</div>
+        <ol>
+          <li>Install the <code>cmu_graphics</code> package and place it alongside the source.</li>
+          <li>Launch <code>Main_Menu.py</code> to start.</li>
+          <li>Return to the main menu at any point from within the app.</li>
+        </ol>
+      </div>
+      <a href="https://github.com/mgrugan/chess112" class="action" target="_blank">View on GitHub <span class="arrow">→</span></a>
+    </div>
+  </article>
+
+  <article id="social" class="project">
+    <aside class="project-side">
+      <div class="project-num">— 03</div>
+      <div class="meta-block"><div class="meta-label">Year</div><div class="meta-value">2022</div></div>
+      <div class="meta-block"><div class="meta-label">Discipline</div><div class="meta-value serif">Data Analysis · NLP</div></div>
+      <div class="meta-block"><div class="meta-label">Tools</div><div class="meta-value">pandas · matplotlib · NLTK</div></div>
+      <div class="meta-block"><div class="meta-label">Context</div><div class="meta-value serif">CMU 15-110</div></div>
+    </aside>
+    <div class="project-main">
+      <div class="project-image-wrap tilt-card"><img src="Untitled design (51).png" alt="Social Media Analytics" /></div>
+      <h2 class="project-title">Social <em>Signals</em></h2>
+      <div class="project-body">
+        <p>A Python-based analysis of bias and emotion in political Facebook and Twitter posts. Uses <code>pandas</code> for cleaning, <code>NLTK</code> for sentiment scoring, and <code>matplotlib</code> for visualizing trends by hashtag and account type.</p>
+      </div>
+      <div class="runbox">
+        <div class="runbox-label">To run</div>
+        <ol>
+          <li>Install dependencies: <code>pandas</code>, <code>matplotlib</code>, <code>nltk</code>.</li>
+          <li>Run <code>hw6_social.py</code>.</li>
+          <li>Call <code>runWeek1()</code>, <code>runWeek2()</code>, etc. for modular analysis.</li>
+        </ol>
+      </div>
+      <a href="https://github.com/mgrugan/15110-Social-Media-Analysis" class="action" target="_blank">View on GitHub <span class="arrow">→</span></a>
+    </div>
+  </article>
+
+  <footer>
+    <span class="mark">Mario Grugan</span>
+    <span>© 2026 — All work shown</span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    const navVideo = document.getElementById("navVideo");
-    document.querySelectorAll("nav a").forEach(link => {
-      link.addEventListener("click", () => {
-        navVideo.currentTime = 0;
-        navVideo.play();
+    /* Nested polyhedron with cursor-warping wireframes */
+    (function() {
+      const canvas = document.getElementById('headerCanvas');
+      if (!canvas || !window.THREE) return;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+      camera.position.set(0, 0, 5.5);
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      function buildWarpable(geometry, color, opacity) {
+        const wire = new THREE.WireframeGeometry(geometry);
+        const rest = new Float32Array(wire.attributes.position.array);
+        const curr = new Float32Array(wire.attributes.position.array);
+        const geom = new THREE.BufferGeometry();
+        geom.setAttribute('position', new THREE.BufferAttribute(curr, 3));
+        const line = new THREE.LineSegments(
+          geom,
+          new THREE.LineBasicMaterial({ color, transparent: true, opacity })
+        );
+        return { line, rest, curr, geom, holder: new THREE.Group() };
+      }
+
+      const outer = buildWarpable(new THREE.DodecahedronGeometry(1.6, 0), 0x8b3a1a, 0.95); // oxblood
+      const inner = buildWarpable(new THREE.IcosahedronGeometry(1.0, 0), 0x3a5a4e, 0.85); // verdigris
+      const core  = buildWarpable(new THREE.OctahedronGeometry(0.5, 0), 0x1a1612, 0.9);  // ink
+      outer.holder.add(outer.line);
+      inner.holder.add(inner.line);
+      core.holder.add(core.line);
+      group.add(outer.holder, inner.holder, core.holder);
+
+      // Center dot
+      const centerDot = new THREE.Mesh(
+        new THREE.SphereGeometry(0.1, 16, 16),
+        new THREE.MeshBasicMaterial({ color: 0xa8742a })
+      );
+      group.add(centerDot);
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        const w = rect.width, h = rect.height;
+        if (w === 0 || h === 0) return;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Mouse
+      const mouseLocal = new THREE.Vector3(999, 999, 0);
+      let mouseActive = false;
+      function updateMouse(cx, cy) {
+        const rect = canvas.getBoundingClientRect();
+        const nx = ((cx - rect.left) / rect.width) * 2 - 1;
+        const ny = -((cy - rect.top) / rect.height) * 2 + 1;
+        const dist = camera.position.z;
+        const vFov = (camera.fov * Math.PI) / 180;
+        const h = 2 * Math.tan(vFov / 2) * dist;
+        const w = h * camera.aspect;
+        mouseLocal.set(nx * w / 2, ny * h / 2, 0);
+      }
+      const wrap = document.querySelector('.page-3d-wrap');
+      wrap.addEventListener('mousemove', (e) => { updateMouse(e.clientX, e.clientY); mouseActive = true; });
+      wrap.addEventListener('mouseleave', () => { mouseActive = false; });
+
+      const tempMouseLocal = new THREE.Vector3();
+      const invGroupQ = new THREE.Quaternion();
+      const invHolderQ = new THREE.Quaternion();
+
+      function warp(obj, radius, maxPull) {
+        invGroupQ.copy(group.quaternion).invert();
+        tempMouseLocal.copy(mouseLocal).applyQuaternion(invGroupQ);
+        invHolderQ.copy(obj.holder.quaternion).invert();
+        tempMouseLocal.applyQuaternion(invHolderQ);
+
+        const inf = mouseActive ? 1 : 0;
+        const lerp = 0.13;
+        const rest = obj.rest;
+        const cur = obj.curr;
+
+        for (let i = 0; i < rest.length; i += 3) {
+          const rx = rest[i], ry = rest[i+1], rz = rest[i+2];
+          const dx = tempMouseLocal.x - rx;
+          const dy = tempMouseLocal.y - ry;
+          const dz = tempMouseLocal.z - rz;
+          const d = Math.sqrt(dx*dx + dy*dy + dz*dz);
+          let pull = 0;
+          if (d < radius && inf > 0) {
+            const t = 1 - d / radius;
+            pull = t * t * maxPull * inf;
+          }
+          let tx = rx, ty = ry, tz = rz;
+          if (pull > 0 && d > 0.001) {
+            tx = rx + (dx/d)*pull;
+            ty = ry + (dy/d)*pull;
+            tz = rz + (dz/d)*pull;
+          }
+          cur[i]   += (tx - cur[i])   * lerp;
+          cur[i+1] += (ty - cur[i+1]) * lerp;
+          cur[i+2] += (tz - cur[i+2]) * lerp;
+        }
+        obj.geom.attributes.position.needsUpdate = true;
+      }
+
+      let t = 0;
+      function tick() {
+        t += 0.006;
+        outer.holder.rotation.x = t * 0.3;
+        outer.holder.rotation.y = t * 0.4;
+        inner.holder.rotation.x = -t * 0.5;
+        inner.holder.rotation.y = -t * 0.6;
+        core.holder.rotation.x = t * 0.8;
+        core.holder.rotation.z = -t * 0.7;
+
+        warp(outer, 2.6, 0.45);
+        warp(inner, 2.0, 0.35);
+        warp(core, 1.5, 0.22);
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `rotateX(${-y * 6}deg) rotateY(${x * 8}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg)';
       });
     });
   </script>
 
 </body>
 </html>
-
