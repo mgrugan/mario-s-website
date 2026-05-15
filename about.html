@@ -2,172 +2,648 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>About – Mario Grugan</title>
+  <title>About — Mario Grugan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="favicon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-color: white;
-      font-family: 'Montserrat', sans-serif;
-      color: #111;
+    :root {
+      --paper: #e8dfc9;
+      --paper-2: #ddd1b6;
+      --paper-deep: #cdbf9d;
+      --ink: #1a1612;
+      --ink-soft: #4a423a;
+      --muted: #8a7f70;
+      --rule: #c9bd9e;
+      --accent: #a85a1f;
+      --accent-bright: #d4843a;
+      --nav-h: 120px;
     }
 
-    * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background:
+        radial-gradient(ellipse at 50% 0%, #ede4cf 0%, #e2d8c1 40%, #cebf9e 100%);
+      background-attachment: fixed;
+      color: var(--ink);
+      font-family: 'Inter Tight', system-ui, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    .navbar-wrapper {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 80px;
-      z-index: 1000;
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1;
+      opacity: 0.4; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0.1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+
+    body::after {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(40, 28, 14, 0.18) 80%, rgba(40, 28, 14, 0.35) 100%);
+    }
+
+    .nav-band {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 100;
       overflow: hidden;
+      border-bottom: 1px solid rgba(232, 160, 74, 0.3);
     }
-
-    .nav-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .nav-band-bg {
+      position: absolute; inset: 0;
+      background-image: url("school.png");
+      background-size: cover;
+      background-position: center 50%;
+      filter: contrast(1.05) saturate(1.05);
       z-index: 0;
-      pointer-events: none;
     }
+    .nav-band::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(20,14,8,0.55) 0%, rgba(20,14,8,0.35) 50%, rgba(20,14,8,0.65) 100%);
+      z-index: 1; pointer-events: none;
+    }
+    .nav {
+      position: relative; z-index: 2;
+      height: 100%; padding: 0 56px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500; font-style: italic;
+      font-size: 32px; letter-spacing: -0.01em;
+      color: #f4efe6; text-decoration: none;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    }
+    .nav-mark .dot {
+      display: inline-block; width: 7px; height: 7px;
+      border-radius: 50%; background: var(--accent-bright);
+      margin: 0 12px 4px; vertical-align: middle;
+      box-shadow: 0 0 12px rgba(232, 160, 74, 0.8);
+    }
+    .nav-links { display: flex; gap: 44px; }
+    .nav-links a {
+      color: #f4efe6; text-decoration: none;
+      font-size: 14px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: lowercase;
+      position: relative; padding: 6px 2px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; bottom: 0;
+      width: 0; height: 1px; background: var(--accent-bright);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 6px rgba(232, 160, 74, 0.6);
+    }
+    .nav-links a:hover { color: var(--accent-bright); }
+    .nav-links a:hover::after { width: 100%; }
+    .painting-credit {
+      position: absolute; bottom: 8px; left: 56px; z-index: 2;
+      font-size: 10px; letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.55);
+      font-family: 'Inter Tight', sans-serif;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+    }
+    .spacer { height: var(--nav-h); }
 
-    nav {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
+    /* === PAGE HEAD with central 3D === */
+    .page-head {
+      max-width: 1400px; margin: 0 auto;
+      padding: 80px 56px 50px;
+      display: grid;
+      grid-template-columns: 1fr 380px 1fr;
+      gap: 40px;
       align-items: center;
-      padding: 0 30px;
+      min-height: 500px;
+      position: relative; z-index: 2;
+    }
+    .page-head-left {
+      text-align: right; padding-right: 20px;
+    }
+    .page-meta {
+      font-size: 12px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .page-meta::after {
+      content: ""; display: inline-block;
+      width: 24px; height: 1px; background: var(--accent);
+      vertical-align: middle; margin-left: 14px;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: 0.95; letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .page-title em { font-style: italic; color: var(--accent); }
+
+    .page-3d-wrap {
+      position: relative;
+      width: 100%; aspect-ratio: 1;
+      max-width: 380px;
+      filter: drop-shadow(0 16px 50px rgba(139, 58, 26, 0.4));
+    }
+    .page-3d-wrap canvas { width: 100%; height: 100%; display: block; }
+    .page-3d-wrap::before {
+      content: "";
+      position: absolute; top: 50%; left: 50%;
+      width: 70%; height: 70%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(139, 58, 26, 0.22) 0%, rgba(139, 58, 26, 0.05) 45%, transparent 70%);
+      pointer-events: none;
+      animation: breathe 5s ease-in-out infinite;
+      z-index: -1;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.12); }
     }
 
-    .nav-left {
+    .page-head-right {
+      padding-left: 20px;
+    }
+    .page-head-right .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
       font-size: 20px;
-      font-weight: 700;
-      color: white;
-      font-family: 'Montserrat', sans-serif;
+      color: var(--ink-soft);
+      line-height: 1.4;
+      max-width: 280px;
     }
 
-    .nav-right {
-      display: flex;
-      gap: 30px;
+    /* === ABOUT GRID === */
+    .about-grid {
+      max-width: 1400px; margin: 0 auto;
+      padding: 30px 56px 120px;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px; align-items: start;
+      position: relative; z-index: 2;
     }
-
-    .nav-right a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .spacer {
-      height: 80px;
-    }
-
-    .about-image-wrapper {
-      max-width: 1000px;
-      margin: 40px auto 20px;
-      padding: 0 20px;
-    }
-
+    .about-image-col { position: sticky; top: calc(var(--nav-h) + 30px); }
     .about-image {
-      width: 100%;
-      height: auto;
-      display: block;
-      max-height: 500px;
-      object-fit: cover;
-      border-radius: 15px;
+      width: 100%; aspect-ratio: 4 / 5;
+      object-fit: cover; display: block;
+      filter: contrast(1.03) saturate(0.95);
+    }
+    .image-caption {
+      margin-top: 14px;
+      font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      display: flex; justify-content: space-between;
+    }
+    .image-caption .credit {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; text-transform: none;
+      letter-spacing: 0; font-size: 14px; color: var(--ink-soft);
+    }
+    .about-text-col { padding-top: 20px; }
+    .lede {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(26px, 2.6vw, 36px);
+      line-height: 1.25; color: var(--ink);
+      margin-bottom: 50px; letter-spacing: -0.01em;
+    }
+    .lede em { font-style: italic; color: var(--accent); }
+    .body-text p {
+      font-size: 17px; line-height: 1.65;
+      color: var(--ink-soft); margin-bottom: 22px;
+    }
+    .body-text p:first-child::first-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 72px; font-weight: 400;
+      float: left; line-height: 0.85;
+      padding: 6px 14px 0 0; color: var(--accent);
+    }
+    .body-text strong { color: var(--ink); font-weight: 500; }
+    .body-text em { color: var(--ink); font-style: italic; }
+
+    .facts {
+      margin-top: 60px; padding-top: 40px;
+      border-top: 1px solid var(--rule);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+    }
+    .fact { position: relative; padding-bottom: 12px; }
+    .fact .num {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400; font-size: 56px;
+      line-height: 1; color: var(--accent);
+      letter-spacing: -0.02em;
+      display: flex; align-items: baseline;
+    }
+    .fact .num .suffix { font-size: 28px; margin-left: 2px; }
+    .fact .num .prefix { font-size: 28px; margin-right: 2px; }
+    .fact .label {
+      margin-top: 10px; font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); line-height: 1.4;
+    }
+    .fact-bar {
+      position: relative; height: 2px;
+      background: var(--rule);
+      margin-top: 18px; overflow: hidden;
+    }
+    .fact-bar::after {
+      content: ""; position: absolute; top: 0; left: 0;
+      height: 100%; width: 0;
+      background: var(--accent);
+      animation: fillbar 1.5s 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .fact:nth-child(2) .fact-bar::after { animation-delay: 0.6s; }
+    .fact:nth-child(3) .fact-bar::after { animation-delay: 0.8s; }
+    @keyframes fillbar { to { width: var(--w, 100%); } }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      max-width: 1400px; margin: 0 auto;
+      padding: 40px 56px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      position: relative; z-index: 2;
+    }
+    footer .mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 16px;
+      letter-spacing: 0; text-transform: none; color: var(--ink-soft);
     }
 
-    .caption {
-      font-size: 14px;
-      color: #555;
-      margin-top: 8px;
-      text-align: left;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .content-container {
-      max-width: 963px;
-      margin: 30px auto 60px;
-      background-color: #eeebe3;
-      border-radius: 15px;
-      padding: 25px 25px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.08);
-    }
-
-    .content-container h1 {
-      text-align: center;
-      font-size: 32px;
-      margin-bottom: 20px;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .content-container p {
-      font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 20px;
-      font-family: 'Montserrat', sans-serif;
+    @media (max-width: 900px) {
+      :root { --nav-h: 90px; }
+      .nav { padding: 0 22px; }
+      .nav-mark { font-size: 22px; }
+      .nav-links { gap: 22px; }
+      .nav-links a { font-size: 11px; letter-spacing: 0.1em; }
+      .painting-credit { left: 22px; font-size: 9px; }
+      .page-head {
+        grid-template-columns: 1fr;
+        padding: 50px 22px 30px;
+        gap: 30px; min-height: auto;
+      }
+      .page-head-left, .page-head-right { text-align: center; padding: 0; }
+      .page-3d-wrap { max-width: 260px; margin: 0 auto; }
+      .page-head-right .tagline { max-width: none; }
+      .about-grid {
+        grid-template-columns: 1fr; gap: 40px;
+        padding: 30px 22px 80px;
+      }
+      .about-image-col { position: static; }
+      .facts { grid-template-columns: 1fr; gap: 30px; }
+      footer { padding: 30px 22px; flex-direction: column; gap: 14px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="navbar-wrapper">
-    <video id="navVideo" class="nav-video" muted autoplay playsinline>
-      <source src="background.mp4" type="video/mp4" />
-    </video>
-    <nav>
-      <div class="nav-left">Mario Grugan</div>
-      <div class="nav-right">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="contact.html">Contact</a>
+  <header class="nav-band">
+    <div class="nav-band-bg"></div>
+    <nav class="nav">
+      <a href="index.html" class="nav-mark">Mario<span class="dot"></span><em>Grugan</em></a>
+      <div class="nav-links">
+        <a href="index.html">home</a>
+        <a href="about.html">about</a>
+        <a href="portfolio.html">work</a>
+        <a href="contact.html">contact</a>
       </div>
     </nav>
-  </div>
+    <div class="painting-credit">Raphael · The School of Athens · 1509–1511</div>
+  </header>
 
   <div class="spacer"></div>
 
-  <figure class="about-image-wrapper">
-    <img src="DSC06285 (2).jpg" alt="CMR Car" class="about-image" />
-    <figcaption class="caption">
-      CMR's 25e open wheeled racecar, Photo Credit: Mario Grugan
-    </figcaption>
-  </figure>
+  <section class="page-head">
+    <div class="page-head-left">
+      <div class="page-meta">About</div>
+      <h1 class="page-title">A short <em>portrait</em></h1>
+    </div>
 
-  <div class="content-container">
-    <h1>About</h1>
-    <p>
-      I am pursuing a Bachelor's degree in Statistics and Machine Learning at Carnegie Mellon University, where I’m deeply involved in campus life through my role on the Carnegie Mellon Racing team (CMR). As the social media lead for CMR—a team of over 150 members—I directed media efforts, created content, and led a campaign that raised a record-breaking $21,000 for the team.
-    </p>
-    <p>
-      Outside of school, I manage a network of Instagram theme pages that reach over 15 million followers and generate more than 120 million impressions each month. One example is @ocean.destinations, which has 5.2 million followers. I’ve been growing and managing Instagram pages for over six years and have helped multiple clients organically scale their presence and gain tens of thousands of followers.
-    </p>
-    <p>
-      I actively apply what I've learned from my degree to optimize both the revenue and reach of my network—developing predictive models, analyzing performance data, and leveraging insights to fine-tune content strategy. This data-driven approach has significantly increased engagement rates and monetization potential across the entire portfolio.
-    </p>
-  </div>
+    <div class="page-3d-wrap">
+      <canvas id="orreryCanvas"></canvas>
+    </div>
 
+    <div class="page-head-right">
+      <p class="tagline">Statistics, engineering, and an audience of <em>fifteen million</em>.</p>
+    </div>
+  </section>
+
+  <section class="about-grid">
+    <div class="about-image-col">
+      <img src="DSC06285 (2).jpg" alt="CMR 25e on track" class="about-image" />
+      <div class="image-caption">
+        <span>CMR 25e</span>
+        <span class="credit">Photograph by Mario Grugan</span>
+      </div>
+    </div>
+
+    <div class="about-text-col">
+      <p class="lede">
+        Built at the intersection of statistics, engineering, and an Instagram network reaching <em>15 million</em> people each month.
+      </p>
+
+      <div class="body-text">
+        <p>
+          I'm pursuing a Bachelor's in Statistics and Data Science at Carnegie Mellon University. On campus I serve as social media lead for Carnegie Mellon Racing, a 150-member team building open-wheeled and hybrid racecars. In that role I directed media efforts, created the content, and led a campaign that raised a record-breaking $37,000 for the team.
+        </p>
+        <p>
+          Outside of school, I manage a network of Instagram theme pages that reach over 15 million followers and generate more than 120 million impressions each month. One example is @ocean.destinations, which has 5.2 million followers. I’ve been growing and managing Instagram pages for over six years and have helped multiple clients organically scale their presence and gain tens of thousands of followers.
+        </p>
+        <p>
+          I actively apply what I've learned from my degree to optimize both the revenue and reach of my network—developing predictive models, analyzing performance data, and leveraging insights to fine-tune content strategy. This data-driven approach has significantly increased engagement rates and monetization potential across the entire portfolio.
+        </p>
+      </div>
+
+      <div class="facts">
+        <div class="fact">
+          <div class="num"><span class="counter" data-target="15">0</span><span class="suffix">M+</span></div>
+          <div class="fact-bar" style="--w: 100%;"></div>
+          <div class="label">Followers across<br/>the network</div>
+        </div>
+        <div class="fact">
+          <div class="num"><span class="counter" data-target="120">0</span><span class="suffix">M</span></div>
+          <div class="fact-bar" style="--w: 85%;"></div>
+          <div class="label">Monthly<br/>impressions</div>
+        </div>
+        <div class="fact">
+          <div class="num"><span class="prefix">$</span><span class="counter" data-target="21">0</span><span class="suffix">k</span></div>
+          <div class="fact-bar" style="--w: 65%;"></div>
+          <div class="label">Raised for<br/>CMR</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="mark">Mario Grugan</span>
+    <span>© 2026 — All work shown</span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    const navVideo = document.getElementById("navVideo");
-    document.querySelectorAll("nav a").forEach(link => {
-      link.addEventListener("click", () => {
-        navVideo.currentTime = 0;
-        navVideo.play();
+    /* Orrery with cursor-warping rings — points on each ring deform toward cursor */
+    (function() {
+      const canvas = document.getElementById('orreryCanvas');
+      if (!canvas || !window.THREE) return;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+      camera.position.set(0, 0, 9);
+
+      // Three distinct Renaissance pigments — varied hues, all readable on cream
+      const oxblood   = 0x8b3a1a;
+      const verdigris = 0x3a5a4e;
+      const ink       = 0x1a1612;
+      const goldDeep  = 0xa8742a;
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      // Build each ring as a line loop with N segments — each vertex warps
+      function makeRing(radius, color, opacity, tiltX, tiltY, segments) {
+        const segs = segments || 96;
+        const pts = new Float32Array(segs * 3);
+        for (let i = 0; i < segs; i++) {
+          const a = (i / segs) * Math.PI * 2;
+          pts[i*3]   = Math.cos(a) * radius;
+          pts[i*3+1] = Math.sin(a) * radius;
+          pts[i*3+2] = 0;
+        }
+        const rest = new Float32Array(pts);
+        const current = new Float32Array(pts);
+
+        // For a line loop, build line-segment pairs
+        const segPos = new Float32Array(segs * 2 * 3);
+        const segGeom = new THREE.BufferGeometry();
+        segGeom.setAttribute('position', new THREE.BufferAttribute(segPos, 3));
+
+        const restPair = new Float32Array(segs * 2 * 3);
+        for (let i = 0; i < segs; i++) {
+          const j = (i + 1) % segs;
+          restPair[i*6]   = pts[i*3];
+          restPair[i*6+1] = pts[i*3+1];
+          restPair[i*6+2] = pts[i*3+2];
+          restPair[i*6+3] = pts[j*3];
+          restPair[i*6+4] = pts[j*3+1];
+          restPair[i*6+5] = pts[j*3+2];
+        }
+
+        const line = new THREE.LineSegments(
+          segGeom,
+          new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: opacity })
+        );
+
+        const wrapper = new THREE.Group();
+        wrapper.rotation.x = tiltX || 0;
+        wrapper.rotation.y = tiltY || 0;
+        wrapper.add(line);
+
+        // Dot on ring — uses same color
+        const dot = new THREE.Mesh(
+          new THREE.SphereGeometry(0.07, 16, 16),
+          new THREE.MeshBasicMaterial({ color: color })
+        );
+        wrapper.add(dot);
+
+        return { wrapper, line, segPos, restPair, dot, radius, segs };
+      }
+
+      // Four rings, each a distinct hue
+      const rings = [
+        makeRing(1.0,  oxblood,   0.95, 0, 0),
+        makeRing(1.55, verdigris, 0.85, Math.PI/4, 0),
+        makeRing(2.1,  ink,       0.75, -Math.PI/3, Math.PI/6),
+        makeRing(2.7,  goldDeep,  0.7,  Math.PI/8, -Math.PI/4)
+      ];
+      rings.forEach((r, i) => {
+        r.dotSpeed = 0.5 / (i + 1) + 0.2;
+        r.dotPhase = i * 1.3;
+        group.add(r.wrapper);
       });
-    });
+
+      // Center sphere — ink for contrast
+      const centerSphere = new THREE.Mesh(
+        new THREE.SphereGeometry(0.14, 24, 24),
+        new THREE.MeshBasicMaterial({ color: ink })
+      );
+      group.add(centerSphere);
+
+      // Outer faint wireframe icosahedron (also warps) — subtle verdigris
+      const outerIco = new THREE.IcosahedronGeometry(3.0, 1);
+      const outerWire = new THREE.WireframeGeometry(outerIco);
+      const outerRest = new Float32Array(outerWire.attributes.position.array);
+      const outerCurrent = new Float32Array(outerWire.attributes.position.array);
+      const outerGeom = new THREE.BufferGeometry();
+      outerGeom.setAttribute('position', new THREE.BufferAttribute(outerCurrent, 3));
+      const outerLines = new THREE.LineSegments(
+        outerGeom,
+        new THREE.LineBasicMaterial({ color: verdigris, transparent: true, opacity: 0.3 })
+      );
+      group.add(outerLines);
+
+      group.rotation.x = -0.2;
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        const w = rect.width, h = rect.height;
+        if (w === 0 || h === 0) return;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Mouse tracking
+      const mouseLocal = new THREE.Vector3(999, 999, 0);
+      let mouseActive = false;
+      function updateMouse(cx, cy) {
+        const rect = canvas.getBoundingClientRect();
+        const nx = ((cx - rect.left) / rect.width) * 2 - 1;
+        const ny = -((cy - rect.top) / rect.height) * 2 + 1;
+        const dist = camera.position.z;
+        const vFov = (camera.fov * Math.PI) / 180;
+        const h = 2 * Math.tan(vFov / 2) * dist;
+        const w = h * camera.aspect;
+        mouseLocal.set(nx * w / 2, ny * h / 2, 0);
+      }
+      const wrap = document.querySelector('.page-3d-wrap');
+      wrap.addEventListener('mousemove', (e) => { updateMouse(e.clientX, e.clientY); mouseActive = true; });
+      wrap.addEventListener('mouseleave', () => { mouseActive = false; });
+
+      const tempMouseLocal = new THREE.Vector3();
+      const inverseGroupQuat = new THREE.Quaternion();
+      const inverseWrapperQuat = new THREE.Quaternion();
+      const tempVec = new THREE.Vector3();
+
+      function warpRing(r) {
+        // Compute mouse in this ring's wrapper-local frame
+        inverseGroupQuat.copy(group.quaternion).invert();
+        tempMouseLocal.copy(mouseLocal).applyQuaternion(inverseGroupQuat);
+        inverseWrapperQuat.copy(r.wrapper.quaternion).invert();
+        tempMouseLocal.applyQuaternion(inverseWrapperQuat);
+
+        const influence = mouseActive ? 1.0 : 0.0;
+        const radius = 2.0;
+        const maxPull = 0.4;
+        const lerp = 0.12;
+
+        const segs = r.segs;
+        const rest = r.restPair;
+        const cur = r.segPos;
+
+        for (let i = 0; i < segs * 2; i++) {
+          const idx = i * 3;
+          const rx = rest[idx], ry = rest[idx+1], rz = rest[idx+2];
+          const dx = tempMouseLocal.x - rx;
+          const dy = tempMouseLocal.y - ry;
+          const dz = tempMouseLocal.z - rz;
+          const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+
+          let pull = 0;
+          if (dist < radius && influence > 0) {
+            const t = 1 - dist / radius;
+            pull = t * t * maxPull * influence;
+          }
+
+          let tx = rx, ty = ry, tz = rz;
+          if (pull > 0 && dist > 0.001) {
+            tx = rx + (dx / dist) * pull;
+            ty = ry + (dy / dist) * pull;
+            tz = rz + (dz / dist) * pull;
+          }
+          cur[idx]   += (tx - cur[idx])   * lerp;
+          cur[idx+1] += (ty - cur[idx+1]) * lerp;
+          cur[idx+2] += (tz - cur[idx+2]) * lerp;
+        }
+        r.line.geometry.attributes.position.needsUpdate = true;
+      }
+
+      function warpVertices(restArr, currArr, attribute) {
+        inverseGroupQuat.copy(group.quaternion).invert();
+        tempMouseLocal.copy(mouseLocal).applyQuaternion(inverseGroupQuat);
+        const influence = mouseActive ? 1.0 : 0.0;
+        const radius = 2.5, maxPull = 0.45, lerp = 0.12;
+
+        for (let i = 0; i < restArr.length; i += 3) {
+          const rx = restArr[i], ry = restArr[i+1], rz = restArr[i+2];
+          const dx = tempMouseLocal.x - rx;
+          const dy = tempMouseLocal.y - ry;
+          const dz = tempMouseLocal.z - rz;
+          const d = Math.sqrt(dx*dx + dy*dy + dz*dz);
+          let pull = 0;
+          if (d < radius && influence > 0) {
+            const t = 1 - d / radius;
+            pull = t * t * maxPull * influence;
+          }
+          let tx = rx, ty = ry, tz = rz;
+          if (pull > 0 && d > 0.001) {
+            tx = rx + (dx/d)*pull;
+            ty = ry + (dy/d)*pull;
+            tz = rz + (dz/d)*pull;
+          }
+          currArr[i]   += (tx - currArr[i])   * lerp;
+          currArr[i+1] += (ty - currArr[i+1]) * lerp;
+          currArr[i+2] += (tz - currArr[i+2]) * lerp;
+        }
+        attribute.needsUpdate = true;
+      }
+
+      let t = 0;
+      function tick() {
+        t += 0.006;
+        group.rotation.y = t * 0.3;
+
+        // Dots orbit
+        rings.forEach(r => {
+          const a = t * r.dotSpeed + r.dotPhase;
+          r.dot.position.x = Math.cos(a) * r.radius;
+          r.dot.position.y = Math.sin(a) * r.radius;
+        });
+
+        // Warp rings
+        rings.forEach(warpRing);
+        warpVertices(outerRest, outerCurrent, outerGeom.attributes.position);
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+
+    /* Counters */
+    function animateCounter(el, target, duration = 1400) {
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(eased * target);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    const counters = document.querySelectorAll('.counter');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target, parseInt(entry.target.dataset.target, 10));
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(c => obs.observe(c));
   </script>
 
 </body>
