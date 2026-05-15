@@ -2,177 +2,571 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Contact – Mario Grugan</title>
+  <title>Contact — Mario Grugan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="favicon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-color: white;
-      font-family: 'Montserrat', sans-serif;
-      color: #111;
+    :root {
+      --paper: #e8dfc9;
+      --paper-2: #ddd1b6;
+      --paper-deep: #cdbf9d;
+      --ink: #1a1612;
+      --ink-soft: #4a423a;
+      --muted: #8a7f70;
+      --rule: #c9bd9e;
+      --accent: #a85a1f;
+      --accent-bright: #d4843a;
+      --nav-h: 120px;
     }
 
-    * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background:
+        radial-gradient(ellipse at 50% 0%, #ede4cf 0%, #e2d8c1 40%, #cebf9e 100%);
+      background-attachment: fixed;
+      color: var(--ink);
+      font-family: 'Inter Tight', system-ui, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    .navbar-wrapper {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 80px;
-      z-index: 1000;
-      overflow: hidden;
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1;
+      opacity: 0.4; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.3  0 0 0 0 0.2  0 0 0 0.1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
     }
 
-    .nav-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    body::after {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 1;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(40, 28, 14, 0.18) 80%, rgba(40, 28, 14, 0.35) 100%);
+    }
+
+    .nav-band {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      z-index: 100; overflow: hidden;
+      border-bottom: 1px solid rgba(232, 160, 74, 0.3);
+    }
+    .nav-band-bg {
+      position: absolute; inset: 0;
+      background-image: url("creation.png");
+      background-size: cover;
+      background-position: 80% 50%;  /* show right side: God's hand and figures */
+      filter: contrast(1.05) saturate(1.05);
       z-index: 0;
-      pointer-events: none;
     }
+    .nav-band::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(20,14,8,0.55) 0%, rgba(20,14,8,0.35) 50%, rgba(20,14,8,0.65) 100%);
+      z-index: 1; pointer-events: none;
+    }
+    .nav {
+      position: relative; z-index: 2;
+      height: 100%; padding: 0 56px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500; font-style: italic;
+      font-size: 32px; letter-spacing: -0.01em;
+      color: #f4efe6; text-decoration: none;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    }
+    .nav-mark .dot {
+      display: inline-block; width: 7px; height: 7px;
+      border-radius: 50%; background: var(--accent-bright);
+      margin: 0 12px 4px; vertical-align: middle;
+      box-shadow: 0 0 12px rgba(232, 160, 74, 0.8);
+    }
+    .nav-links { display: flex; gap: 44px; }
+    .nav-links a {
+      color: #f4efe6; text-decoration: none;
+      font-size: 14px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: lowercase;
+      position: relative; padding: 6px 2px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; bottom: 0;
+      width: 0; height: 1px; background: var(--accent-bright);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 0 6px rgba(232, 160, 74, 0.6);
+    }
+    .nav-links a:hover { color: var(--accent-bright); }
+    .nav-links a:hover::after { width: 100%; }
+    .painting-credit {
+      position: absolute; bottom: 8px; left: 56px; z-index: 2;
+      font-size: 10px; letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(244, 239, 230, 0.55);
+      font-family: 'Inter Tight', sans-serif;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+    }
+    .spacer { height: var(--nav-h); }
 
-    nav {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
+    .page-head {
+      max-width: 1400px; margin: 0 auto;
+      padding: 80px 56px 50px;
+      display: grid;
+      grid-template-columns: 1fr 380px 1fr;
+      gap: 40px;
       align-items: center;
-      padding: 0 30px;
+      min-height: 500px;
+      position: relative; z-index: 2;
+    }
+    .page-head-left { text-align: right; padding-right: 20px; }
+    .page-meta {
+      font-size: 12px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .page-meta::after {
+      content: ""; display: inline-block;
+      width: 24px; height: 1px; background: var(--accent);
+      vertical-align: middle; margin-left: 14px;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: 0.95; letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .page-title em { font-style: italic; color: var(--accent); }
+
+    .page-3d-wrap {
+      position: relative;
+      width: 100%; aspect-ratio: 1;
+      max-width: 380px;
+      filter: drop-shadow(0 16px 50px rgba(139, 58, 26, 0.4));
+    }
+    .page-3d-wrap canvas { width: 100%; height: 100%; display: block; }
+    .page-3d-wrap::before {
+      content: "";
+      position: absolute; top: 50%; left: 50%;
+      width: 70%; height: 70%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(139, 58, 26, 0.22) 0%, rgba(139, 58, 26, 0.05) 45%, transparent 70%);
+      pointer-events: none;
+      animation: breathe 5s ease-in-out infinite;
+      z-index: -1;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50%      { opacity: 1;   transform: translate(-50%, -50%) scale(1.12); }
     }
 
-    .nav-left {
-      font-size: 20px;
-      font-weight: 700;
-      color: white;
+    .page-head-right { padding-left: 20px; }
+    .page-head-right .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 20px;
+      color: var(--ink-soft); line-height: 1.4;
+      max-width: 280px;
     }
 
-    .nav-right {
-      display: flex;
-      gap: 30px;
+    .contact-grid {
+      max-width: 1400px; margin: 0 auto;
+      padding: 30px 56px 100px;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px; align-items: start;
+      position: relative; z-index: 2;
+    }
+    .contact-left { position: sticky; top: calc(var(--nav-h) + 30px); }
+    .lede {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(26px, 2.4vw, 34px);
+      line-height: 1.25; color: var(--ink);
+      margin-bottom: 40px; letter-spacing: -0.01em;
+    }
+    .lede em { font-style: italic; color: var(--accent); }
+
+    .direct-info {
+      border-top: 1px solid var(--rule);
+      padding-top: 30px;
+    }
+    .direct-info-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 20px; padding: 14px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+    .direct-info-label {
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .direct-info-value { font-size: 16px; color: var(--ink); }
+    .direct-info-value a {
+      color: var(--ink); text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s;
+    }
+    .direct-info-value a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
 
-    .nav-right a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
+    .form-wrap { padding-top: 16px; }
+    .form-eyebrow {
+      font-size: 12px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 32px;
     }
-
-    .spacer {
-      height: 80px;
+    .form-eyebrow::before {
+      content: ""; display: inline-block;
+      width: 24px; height: 1px; background: var(--accent);
+      vertical-align: middle; margin-right: 14px;
     }
-
-    .form-wrapper {
-      max-width: 600px;
-      margin: 80px auto 40px;
-      padding: 0 20px;
-    }
-
-    label {
+    .field { margin-bottom: 32px; position: relative; }
+    .field label {
       display: block;
-      margin-top: 20px;
-      font-weight: 600;
-      font-size: 16px;
+      font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 10px;
     }
-
-    input, textarea {
+    .field label .req { color: var(--accent); margin-left: 4px; }
+    .field input, .field textarea {
       width: 100%;
-      padding: 12px;
-      margin-top: 8px;
-      background-color: #eeebe3;
-      border: 1px solid #aaa;
-      border-radius: 10px;
-      font-size: 16px;
-      font-family: 'Montserrat', sans-serif;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--rule);
+      padding: 10px 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; color: var(--ink);
+      transition: border-color 0.3s;
     }
-
-    textarea {
-      min-height: 120px;
-      resize: vertical;
+    .field input::placeholder, .field textarea::placeholder {
+      color: var(--muted); opacity: 0.5; font-style: italic;
+    }
+    .field input:focus, .field textarea:focus {
+      outline: none; border-bottom-color: var(--accent);
+    }
+    .field textarea {
+      resize: vertical; min-height: 120px;
+      line-height: 1.4;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 16px;
     }
 
     button {
-      margin-top: 25px;
-      background-color: black;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 5px;
-      cursor: pointer;
+      margin-top: 20px;
+      background: var(--ink); color: var(--paper);
+      border: none; padding: 18px 36px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 20px;
+      letter-spacing: -0.005em; cursor: pointer;
+      transition: transform 0.3s;
+      display: inline-flex; align-items: center; gap: 14px;
+      position: relative;
+      overflow: hidden;
     }
-
-    .bottom-image-wrapper {
-      max-width: 600px;
-      margin: 40px auto 60px;
-      padding: 0 20px;
+    button::before {
+      content: ""; position: absolute; inset: 0;
+      background: var(--accent);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 0;
     }
+    button:hover::before { transform: translateY(0); }
+    button:hover { transform: translateY(-2px); }
+    button .label, button .arrow { position: relative; z-index: 1; }
+    button .arrow {
+      font-family: 'Inter Tight', sans-serif;
+      font-style: normal; font-size: 16px;
+      transition: transform 0.3s;
+    }
+    button:hover .arrow { transform: translateX(4px); }
 
     .bottom-image {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 56px 100px;
+      position: relative; z-index: 2;
+    }
+    .bottom-image img {
       width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 15px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover; display: block;
+      filter: contrast(1.03) saturate(0.92);
+    }
+    .bottom-image-caption {
+      margin-top: 14px;
+      font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      display: flex; justify-content: space-between;
+    }
+    .bottom-image-caption .italic {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; text-transform: none;
+      letter-spacing: 0; font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    footer {
+      border-top: 1px solid var(--rule);
+      max-width: 1400px; margin: 0 auto;
+      padding: 40px 56px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      position: relative; z-index: 2;
+    }
+    footer .mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 16px;
+      letter-spacing: 0; text-transform: none;
+      color: var(--ink-soft);
+    }
+
+    @media (max-width: 900px) {
+      :root { --nav-h: 90px; }
+      .nav { padding: 0 22px; }
+      .nav-mark { font-size: 22px; }
+      .nav-links { gap: 22px; }
+      .nav-links a { font-size: 11px; letter-spacing: 0.1em; }
+      .painting-credit { left: 22px; font-size: 9px; }
+      .page-head {
+        grid-template-columns: 1fr;
+        padding: 50px 22px 30px;
+        gap: 30px; min-height: auto;
+      }
+      .page-head-left, .page-head-right { text-align: center; padding: 0; }
+      .page-3d-wrap { max-width: 260px; margin: 0 auto; }
+      .page-head-right .tagline { max-width: none; }
+      .contact-grid {
+        grid-template-columns: 1fr; gap: 50px;
+        padding: 30px 22px 60px;
+      }
+      .contact-left { position: static; }
+      .bottom-image { padding: 0 22px 60px; }
+      footer { padding: 30px 22px; flex-direction: column; gap: 14px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="navbar-wrapper">
-    <video id="navVideo" class="nav-video" muted autoplay playsinline>
-      <source src="background.mp4" type="video/mp4" />
-    </video>
-    <nav>
-      <div class="nav-left">Mario Grugan</div>
-      <div class="nav-right">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="contact.html">Contact</a>
+  <header class="nav-band">
+    <div class="nav-band-bg"></div>
+    <nav class="nav">
+      <a href="index.html" class="nav-mark">Mario<span class="dot"></span><em>Grugan</em></a>
+      <div class="nav-links">
+        <a href="index.html">home</a>
+        <a href="about.html">about</a>
+        <a href="portfolio.html">work</a>
+        <a href="contact.html">contact</a>
       </div>
     </nav>
-  </div>
+    <div class="painting-credit">Michelangelo · Creation of Adam (detail) · c. 1512</div>
+  </header>
 
   <div class="spacer"></div>
 
-  <div class="form-wrapper">
-    <form action="https://formsubmit.co/mgrugan@andrew.cmu.edu" method="POST">
-      <label for="name">Name <span style="font-weight: 300;">(required)</span></label>
-      <input type="text" id="name" name="name" required>
+  <section class="page-head">
+    <div class="page-head-left">
+      <div class="page-meta">Contact</div>
+      <h1 class="page-title">Get in <em>touch</em></h1>
+    </div>
+    <div class="page-3d-wrap">
+      <canvas id="contactCanvas"></canvas>
+    </div>
+    <div class="page-head-right">
+      <p class="tagline">Open to projects, collaboration, and the occasional <em>good question</em>.</p>
+    </div>
+  </section>
 
-      <label for="email">Email <span style="font-weight: 300;">(required)</span></label>
-      <input type="email" id="email" name="email" required>
+  <section class="contact-grid">
+    <div class="contact-left">
+      <p class="lede">
+        Reply usually within a <em>day</em>. Send a note or write directly.
+      </p>
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message"></textarea>
+      <div class="direct-info">
+        <div class="direct-info-row">
+          <span class="direct-info-label">Email</span>
+          <span class="direct-info-value">
+            <a href="mailto:mgrugan@andrew.cmu.edu">mgrugan@andrew.cmu.edu</a>
+          </span>
+        </div>
+        <div class="direct-info-row">
+          <span class="direct-info-label">Location</span>
+          <span class="direct-info-value">Pittsburgh, PA</span>
+        </div>
+        <div class="direct-info-row">
+          <span class="direct-info-label">University</span>
+          <span class="direct-info-value">Carnegie Mellon</span>
+        </div>
+      </div>
+    </div>
 
-      <button type="submit">Send Message</button>
-    </form>
-  </div>
+    <div class="form-wrap">
+      <div class="form-eyebrow">Or send a note</div>
+      <form action="https://formsubmit.co/mgrugan@andrew.cmu.edu" method="POST">
+        <div class="field">
+          <label for="name">Name <span class="req">*</span></label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="you@domain.com" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="What's on your mind?"></textarea>
+        </div>
+        <button type="submit">
+          <span class="label">Send message</span> <span class="arrow">→</span>
+        </button>
+      </form>
+    </div>
+  </section>
 
-  <div class="bottom-image-wrapper">
-    <img src="97CFE6E0-050B-4985-9E21-CA27F117FB2E.JPG" alt="Chess Game" class="bottom-image">
-  </div>
+  <section class="bottom-image">
+    <img src="97CFE6E0-050B-4985-9E21-CA27F117FB2E.JPG" alt="Chess tournament" />
+    <div class="bottom-image-caption">
+      <span>Off the clock</span>
+      <span class="italic">Chess tournament, 2024</span>
+    </div>
+  </section>
 
+  <footer>
+    <span class="mark">Mario Grugan</span>
+    <span>© 2026 — All work shown</span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    const navVideo = document.getElementById("navVideo");
-    document.querySelectorAll("nav a").forEach(link => {
-      link.addEventListener("click", () => {
-        navVideo.currentTime = 0;
-        navVideo.play();
-      });
-    });
+    /* Nested Platonic solids with cursor warping */
+    (function() {
+      const canvas = document.getElementById('contactCanvas');
+      if (!canvas || !window.THREE) return;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+      camera.position.set(0, 0, 5.5);
+
+      const group = new THREE.Group();
+      scene.add(group);
+
+      function buildWarpable(geometry, color, opacity) {
+        const wire = new THREE.WireframeGeometry(geometry);
+        const rest = new Float32Array(wire.attributes.position.array);
+        const curr = new Float32Array(wire.attributes.position.array);
+        const geom = new THREE.BufferGeometry();
+        geom.setAttribute('position', new THREE.BufferAttribute(curr, 3));
+        const line = new THREE.LineSegments(
+          geom,
+          new THREE.LineBasicMaterial({ color, transparent: true, opacity })
+        );
+        return { line, rest, curr, geom, holder: new THREE.Group() };
+      }
+
+      const octa = buildWarpable(new THREE.OctahedronGeometry(1.6, 0), 0x8b3a1a, 0.95); // oxblood
+      const cube = buildWarpable(new THREE.BoxGeometry(1.15, 1.15, 1.15), 0x3a5a4e, 0.9); // verdigris
+      const tetra = buildWarpable(new THREE.TetrahedronGeometry(0.6, 0), 0x1a1612, 0.9); // ink
+      octa.holder.add(octa.line);
+      cube.holder.add(cube.line);
+      tetra.holder.add(tetra.line);
+      group.add(octa.holder, cube.holder, tetra.holder);
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        const w = rect.width, h = rect.height;
+        if (w === 0 || h === 0) return;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const mouseLocal = new THREE.Vector3(999, 999, 0);
+      let mouseActive = false;
+      function updateMouse(cx, cy) {
+        const rect = canvas.getBoundingClientRect();
+        const nx = ((cx - rect.left) / rect.width) * 2 - 1;
+        const ny = -((cy - rect.top) / rect.height) * 2 + 1;
+        const dist = camera.position.z;
+        const vFov = (camera.fov * Math.PI) / 180;
+        const h = 2 * Math.tan(vFov / 2) * dist;
+        const w = h * camera.aspect;
+        mouseLocal.set(nx * w / 2, ny * h / 2, 0);
+      }
+      const wrap = document.querySelector('.page-3d-wrap');
+      wrap.addEventListener('mousemove', (e) => { updateMouse(e.clientX, e.clientY); mouseActive = true; });
+      wrap.addEventListener('mouseleave', () => { mouseActive = false; });
+
+      const tempMouseLocal = new THREE.Vector3();
+      const invGroupQ = new THREE.Quaternion();
+      const invHolderQ = new THREE.Quaternion();
+
+      function warp(obj, radius, maxPull) {
+        invGroupQ.copy(group.quaternion).invert();
+        tempMouseLocal.copy(mouseLocal).applyQuaternion(invGroupQ);
+        invHolderQ.copy(obj.holder.quaternion).invert();
+        tempMouseLocal.applyQuaternion(invHolderQ);
+
+        const inf = mouseActive ? 1 : 0;
+        const lerp = 0.13;
+        const rest = obj.rest;
+        const cur = obj.curr;
+
+        for (let i = 0; i < rest.length; i += 3) {
+          const rx = rest[i], ry = rest[i+1], rz = rest[i+2];
+          const dx = tempMouseLocal.x - rx;
+          const dy = tempMouseLocal.y - ry;
+          const dz = tempMouseLocal.z - rz;
+          const d = Math.sqrt(dx*dx + dy*dy + dz*dz);
+          let pull = 0;
+          if (d < radius && inf > 0) {
+            const t = 1 - d / radius;
+            pull = t * t * maxPull * inf;
+          }
+          let tx = rx, ty = ry, tz = rz;
+          if (pull > 0 && d > 0.001) {
+            tx = rx + (dx/d)*pull;
+            ty = ry + (dy/d)*pull;
+            tz = rz + (dz/d)*pull;
+          }
+          cur[i]   += (tx - cur[i])   * lerp;
+          cur[i+1] += (ty - cur[i+1]) * lerp;
+          cur[i+2] += (tz - cur[i+2]) * lerp;
+        }
+        obj.geom.attributes.position.needsUpdate = true;
+      }
+
+      let t = 0;
+      function tick() {
+        t += 0.006;
+        octa.holder.rotation.x = t * 0.4;
+        octa.holder.rotation.y = t * 0.5;
+        cube.holder.rotation.x = -t * 0.6;
+        cube.holder.rotation.y = t * 0.4;
+        tetra.holder.rotation.x = t * 0.9;
+        tetra.holder.rotation.z = -t * 0.7;
+
+        warp(octa, 2.6, 0.5);
+        warp(cube, 2.0, 0.35);
+        warp(tetra, 1.5, 0.22);
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
   </script>
 
 </body>
