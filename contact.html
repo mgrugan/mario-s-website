@@ -150,7 +150,12 @@
       max-width: 380px;
       filter: drop-shadow(0 16px 50px rgba(139, 58, 26, 0.4));
     }
-    .page-3d-wrap canvas { width: 100%; height: 100%; display: block; }
+    .page-3d-wrap canvas {
+      width: 100%; height: 100%; display: block;
+      cursor: grab; touch-action: none;
+    }
+    .page-3d-wrap canvas:active,
+    .page-3d-wrap canvas.dragging { cursor: grabbing; }
     .page-3d-wrap::before {
       content: "";
       position: absolute; top: 50%; left: 50%;
@@ -505,9 +510,45 @@
         const w = h * camera.aspect;
         mouseLocal.set(nx * w / 2, ny * h / 2, 0);
       }
+
+      // Drag-to-rotate state
+      let dragging = false;
+      let lastDragX = 0, lastDragY = 0;
+      let dragRotX = 0, dragRotY = 0;
+      const dragSensitivity = 0.008;
+
       const wrap = document.querySelector('.page-3d-wrap');
-      wrap.addEventListener('mousemove', (e) => { updateMouse(e.clientX, e.clientY); mouseActive = true; });
-      wrap.addEventListener('mouseleave', () => { mouseActive = false; });
+      wrap.addEventListener('pointermove', (e) => {
+        updateMouse(e.clientX, e.clientY);
+        mouseActive = true;
+        if (dragging) {
+          const dx = e.clientX - lastDragX;
+          const dy = e.clientY - lastDragY;
+          dragRotY += dx * dragSensitivity;
+          dragRotX += dy * dragSensitivity;
+          dragRotX = Math.max(-Math.PI/2, Math.min(Math.PI/2, dragRotX));
+          lastDragX = e.clientX;
+          lastDragY = e.clientY;
+        }
+      });
+      wrap.addEventListener('pointerleave', () => { mouseActive = false; });
+
+      canvas.addEventListener('pointerdown', (e) => {
+        dragging = true;
+        lastDragX = e.clientX;
+        lastDragY = e.clientY;
+        canvas.classList.add('dragging');
+        canvas.setPointerCapture(e.pointerId);
+        e.preventDefault();
+      });
+      const endDrag = (e) => {
+        if (!dragging) return;
+        dragging = false;
+        canvas.classList.remove('dragging');
+        try { canvas.releasePointerCapture(e.pointerId); } catch (err) {}
+      };
+      canvas.addEventListener('pointerup', endDrag);
+      canvas.addEventListener('pointercancel', endDrag);
 
       const tempMouseLocal = new THREE.Vector3();
       const invGroupQ = new THREE.Quaternion();
@@ -550,7 +591,9 @@
 
       let t = 0;
       function tick() {
-        t += 0.006;
+        if (!dragging) t += 0.006;
+        group.rotation.x = dragRotX;
+        group.rotation.y = dragRotY;
         octa.holder.rotation.x = t * 0.4;
         octa.holder.rotation.y = t * 0.5;
         cube.holder.rotation.x = -t * 0.6;
