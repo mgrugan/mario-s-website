@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Wysdom AI — mobile study feed with active-recall cards and an AI spark -->
+  <!-- construction guides -->
+  <circle cx="200" cy="200" r="150" stroke="#3a5a4e" stroke-width="1" opacity="0.22"/>
+  <line x1="40" y1="200" x2="360" y2="200" stroke="#8b3a1a" stroke-width="1" opacity="0.18"/>
+
+  <!-- phone frame -->
+  <rect x="132" y="40" width="136" height="320" rx="22" stroke="#1a1612" stroke-width="4"/>
+  <line x1="180" y1="58" x2="220" y2="58" stroke="#1a1612" stroke-width="4"/>
+
+  <!-- vertical feed of question cards -->
+  <rect x="150" y="80" width="100" height="70" rx="8" stroke="#8b3a1a" stroke-width="3"/>
+  <line x1="164" y1="100" x2="236" y2="100" stroke="#8b3a1a" stroke-width="3" opacity="0.7"/>
+  <line x1="164" y1="116" x2="214" y2="116" stroke="#8b3a1a" stroke-width="3" opacity="0.5"/>
+  <circle cx="170" cy="134" r="4" fill="#a8742a" stroke="none"/>
+  <line x1="182" y1="134" x2="230" y2="134" stroke="#8b3a1a" stroke-width="3" opacity="0.6"/>
+
+  <rect x="150" y="164" width="100" height="70" rx="8" stroke="#3a5a4e" stroke-width="3"/>
+  <line x1="164" y1="184" x2="236" y2="184" stroke="#3a5a4e" stroke-width="3" opacity="0.7"/>
+  <path d="M 168 208 l 8 8 l 16 -18" stroke="#3a5a4e" stroke-width="3.5"/>
+  <line x1="204" y1="212" x2="232" y2="212" stroke="#3a5a4e" stroke-width="3" opacity="0.6"/>
+
+  <rect x="150" y="248" width="100" height="70" rx="8" stroke="#c9bd9e" stroke-width="3"/>
+  <line x1="164" y1="268" x2="236" y2="268" stroke="#c9bd9e" stroke-width="3"/>
+  <line x1="164" y1="284" x2="212" y2="284" stroke="#c9bd9e" stroke-width="3"/>
+
+  <!-- scroll indicator -->
+  <path d="M 200 332 l 0 16 M 194 342 l 6 6 l 6 -6" stroke="#1a1612" stroke-width="3"/>
+
+  <!-- AI spark -->
+  <path d="M 300 110 l 6 18 l 18 6 l -18 6 l -6 18 l -6 -18 l -18 -6 l 18 -6 z" stroke="#a8742a" stroke-width="3" fill="none"/>
+  <circle cx="96" cy="150" r="5" fill="#8b3a1a" stroke="none"/>
+</svg>

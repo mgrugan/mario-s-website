@@ -1,10 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add('loading');</script>
   <meta charset="UTF-8" />
-  <title>Mario Grugan</title>
+  <title>Mario Grugan — Data Science & Machine Learning Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mario Grugan is a Statistics & Data Science student at Carnegie Mellon University working across machine learning, data, and large-scale social platforms reaching 15M+ followers. Projects include Wysdom AI, the Signal SEO/GEO audit tool, and Formula Hybrid optimization." />
+  <meta name="author" content="Mario Grugan" />
+  <link rel="canonical" href="https://mariogrugan.com/" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content="Mario Grugan" />
+  <meta property="og:title" content="Mario Grugan — Data Science & Machine Learning Portfolio" />
+  <meta property="og:description" content="Statistics & Data Science at Carnegie Mellon, working across machine learning, data, and social platforms reaching 15M+ people. Explore selected work in AI, optimization, and analytics." />
+  <meta property="og:url" content="https://mariogrugan.com/" />
+  <meta property="og:image" content="https://mariogrugan.com/creation.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mario Grugan — Data Science & Machine Learning Portfolio" />
+  <meta name="twitter:description" content="Statistics & Data Science at Carnegie Mellon. Projects in AI, optimization, and analytics, plus a 15M+ follower social network." />
+  <meta name="twitter:image" content="https://mariogrugan.com/creation.png" />
+
   <link rel="icon" type="image/png" href="favicon.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mario Grugan",
+    "url": "https://mariogrugan.com/",
+    "jobTitle": "Statistics & Data Science Student",
+    "description": "Statistics and Data Science student at Carnegie Mellon University working across machine learning, data, and large-scale social platforms reaching 15 million people.",
+    "affiliation": { "@type": "CollegeOrUniversity", "name": "Carnegie Mellon University" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Carnegie Mellon University" },
+    "worksFor": { "@type": "Organization", "name": "Carnegie Mellon Racing" },
+    "homeLocation": { "@type": "Place", "name": "Pittsburgh, PA, USA" },
+    "email": "mailto:mgrugan@andrew.cmu.edu",
+    "knowsAbout": ["Statistics", "Data Science", "Machine Learning", "Social Media Growth", "SEO", "Optimization", "Sentiment Analysis"],
+    "sameAs": [
+      "https://github.com/mgrugan",
+      "https://mgrugan.github.io/signal/",
+      "https://apps.apple.com/us/app/wysdom-ai/id6756771387"
+    ]
+  }
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -148,6 +188,41 @@
     }
 
     .spacer { height: var(--nav-h); }
+
+    /* Image preloader — holds a paper-colored veil until key images are cached,
+       and keeps the intro animations paused at frame 0 so nothing pops in or
+       plays behind the veil. Only active when JS is present; without JS the
+       page and its original animations behave exactly as before. */
+    #page-loader { display: none; }
+    html.loading #page-loader {
+      display: block;
+      position: fixed; inset: 0; z-index: 10000;
+      background: radial-gradient(ellipse at 50% 0%, #ede4cf 0%, #e2d8c1 40%, #cebf9e 100%);
+      opacity: 1;
+      transition: opacity 0.55s ease;
+    }
+    html.loading.ready #page-loader { opacity: 0; pointer-events: none; }
+
+    /* While loading (JS present, images not yet cached), freeze every intro
+       animation at its first frame so it plays in full once revealed. */
+    html.loading:not(.ready) .nav-band-bg,
+    html.loading:not(.ready) .nav-mark,
+    html.loading:not(.ready) .nav-links a,
+    html.loading:not(.ready) .painting-credit,
+    html.loading:not(.ready) .construction-grid,
+    html.loading:not(.ready) .construction-grid svg line,
+    html.loading:not(.ready) .construction-grid svg circle,
+    html.loading:not(.ready) .sphere-construction,
+    html.loading:not(.ready) .sphere-construction circle,
+    html.loading:not(.ready) .sphere-construction line,
+    html.loading:not(.ready) .hero-meta,
+    html.loading:not(.ready) .hero-title,
+    html.loading:not(.ready) .hero-sub,
+    html.loading:not(.ready) .hero-cta,
+    html.loading:not(.ready) .hero-3d-wrap,
+    html.loading:not(.ready) .hero-title em::before {
+      animation-play-state: paused !important;
+    }
 
     /* === HERO === */
     .hero {
@@ -571,6 +646,8 @@
 </head>
 <body>
 
+  <div id="page-loader" aria-hidden="true"></div>
+
   <!-- Intro: construction grid that draws itself and fades out -->
   <div class="construction-grid" aria-hidden="true">
     <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -922,9 +999,17 @@
       // ------- Animate
       // Start the group invisibly small for the intro reveal
       group.scale.setScalar(0.0);
-      const introStart = performance.now() + 1250; // sync with .hero-3d-wrap rise delay (1.25s)
+      // introStart is set the moment the preloader reveals the page, so the
+      // assemble-in stays in sync with the CSS intro instead of playing behind
+      // the loading veil.
+      let introStart = null;
       const introDuration = 1100; // 1.1s for the assemble-in
       let introComplete = false;
+
+      function pageReady() {
+        return !document.documentElement.classList.contains('loading')
+            || document.documentElement.classList.contains('ready');
+      }
 
       let t = 0;
       function tick() {
@@ -932,6 +1017,16 @@
 
         // === Intro scale-up ===
         if (!introComplete) {
+          if (!pageReady()) {
+            // Still behind the loading veil — hold the sphere collapsed.
+            group.scale.setScalar(0.0);
+            renderer.render(scene, camera);
+            requestAnimationFrame(tick);
+            return;
+          }
+          if (introStart === null) {
+            introStart = performance.now() + 1250; // sync with .hero-3d-wrap rise delay (1.25s)
+          }
           const now = performance.now();
           if (now < introStart) {
             group.scale.setScalar(0.0);
@@ -986,6 +1081,35 @@
         card.style.transform = 'rotateX(0deg) rotateY(0deg)';
       });
     });
+
+    /* Image preloader — hold the paper veil (and the paused intro) until the
+       painting and thumbnails are cached, then reveal everything in sync.
+       A load-event and hard timeout guarantee it can never hang. */
+    (function() {
+      var root = document.documentElement;
+      var images = [
+        'creation.png',
+        '25e.png', 'CHESS-112.png', 'Untitled design (51).png'
+      ];
+      var lifted = false;
+      function reveal() {
+        if (lifted) return;
+        lifted = true;
+        root.classList.add('ready');
+      }
+      var remaining = images.length;
+      if (remaining === 0) { reveal(); return; }
+      images.forEach(function(src) {
+        var img = new Image();
+        img.onload = img.onerror = function() {
+          remaining--;
+          if (remaining <= 0) reveal();
+        };
+        img.src = src;
+      });
+      window.addEventListener('load', reveal);   // safety net
+      setTimeout(reveal, 4000);                   // never hang
+    })();
   </script>
 
 </body>
