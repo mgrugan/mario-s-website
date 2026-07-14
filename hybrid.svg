@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Formula Hybrid Optimization — regression scatter, fitted line, and a marked optimum -->
+  <!-- construction guides -->
+  <circle cx="200" cy="200" r="140" stroke="#3a5a4e" stroke-width="1" opacity="0.2"/>
+  <!-- axes -->
+  <path d="M 90 300 H 330" stroke="#1a1612" stroke-width="2.5"/>
+  <path d="M 90 300 V 90" stroke="#1a1612" stroke-width="2.5"/>
+  <path d="M 90 300 l -6 6 M 90 90 l -6 6 M 90 90 l 6 6" stroke="#1a1612" stroke-width="2.5"/>
+
+  <!-- fitted regression line -->
+  <path d="M 100 288 L 316 120" stroke="#8b3a1a" stroke-width="4"/>
+
+  <!-- scatter points hugging the line (tight fit, R^2 = 0.988) -->
+  <circle cx="120" cy="278" r="5" fill="#a8742a" stroke="none"/>
+  <circle cx="150" cy="252" r="5" fill="#a8742a" stroke="none"/>
+  <circle cx="180" cy="236" r="5" fill="#a8742a" stroke="none"/>
+  <circle cx="210" cy="206" r="5" fill="#a8742a" stroke="none"/>
+  <circle cx="240" cy="188" r="5" fill="#a8742a" stroke="none"/>
+  <circle cx="270" cy="158" r="5" fill="#a8742a" stroke="none"/>
+  <circle cx="298" cy="138" r="5" fill="#a8742a" stroke="none"/>
+
+  <!-- optimization peak curve + optimum marker -->
+  <path d="M 110 250 Q 210 150 250 150 Q 300 150 320 250" stroke="#3a5a4e" stroke-width="2.5" opacity="0.75"/>
+  <path d="M 230 150 V 300" stroke="#3a5a4e" stroke-width="1.5" stroke-dasharray="5 6" opacity="0.7"/>
+  <circle cx="230" cy="150" r="7" fill="none" stroke="#8b3a1a" stroke-width="3"/>
+  <circle cx="230" cy="150" r="2.5" fill="#8b3a1a" stroke="none"/>
+</svg>

@@ -337,16 +337,19 @@
     .project-image-wrap {
       background: #ede4cf;
       aspect-ratio: 16 / 10;
+      max-width: 560px;               /* keep the plate compact on desktop */
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
-      margin-bottom: 40px; padding: 40px;
+      margin-bottom: 40px; padding: 32px;
       transform-style: preserve-3d;
       transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1),
                   box-shadow 0.6s ease;
       will-change: transform;
     }
     .project-image-wrap img {
-      max-width: 100%; max-height: 100%;
+      /* Cap below 100% so the artwork always keeps a margin inside the plate
+         and never reads as cut off, on any screen size. */
+      max-width: 86%; max-height: 86%;
       object-fit: contain; mix-blend-mode: multiply;
       transform: translateZ(50px);
       transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
@@ -473,7 +476,7 @@
       }
       .project-side { position: static; }
       .runbox { grid-template-columns: 1fr; gap: 14px; padding: 18px 0; }
-      .project-image-wrap { padding: 22px; }
+      .project-image-wrap { padding: 24px; aspect-ratio: 4 / 3; max-width: none; }
       .project-main { perspective: none; }
       footer { padding: 30px 22px; flex-direction: column; gap: 14px; }
     }
@@ -658,7 +661,7 @@
     </aside>
     <div class="project-main">
       <div class="project-image-wrap tilt-card">
-        <img src="25e.png" alt="Formula Hybrid 25e" />
+        <img src="hybrid.svg" alt="Formula Hybrid optimization — regression scatter with a fitted line and a marked optimum" />
       </div>
       <h2 class="project-title">Formula Hybrid <em>Optimization</em></h2>
       <div class="project-body">
@@ -684,7 +687,7 @@
       <div class="meta-block"><div class="meta-label">Context</div><div class="meta-value serif">CMU 15-112</div></div>
     </aside>
     <div class="project-main">
-      <div class="project-image-wrap tilt-card"><img src="CHESS-112.png" alt="AI Chess" /></div>
+      <div class="project-image-wrap tilt-card"><img src="chess.svg" alt="AI Chess — a board with a knight's L-move and a minimax decision branch" /></div>
       <h2 class="project-title">AI <em>Chess</em></h2>
       <div class="project-body">
         <p>A full chess engine built from scratch for CMU's 15-112 course. Handles the complete rule set — castling, en passant, promotion, check, checkmate, and stalemate — with an AI opponent that prioritizes capturing high-value pieces. Built on <code>cmu_graphics</code> with a menu-driven interface.</p>
@@ -710,7 +713,7 @@
       <div class="meta-block"><div class="meta-label">Context</div><div class="meta-value serif">CMU 15-110</div></div>
     </aside>
     <div class="project-main">
-      <div class="project-image-wrap tilt-card"><img src="Untitled design (51).png" alt="Social Media Analytics" /></div>
+      <div class="project-image-wrap tilt-card"><img src="social.svg" alt="Social Signals — speech bubbles and a sentiment distribution of political posts" /></div>
       <h2 class="project-title">Social <em>Signals</em></h2>
       <div class="project-body">
         <p>A Python-based analysis of bias and emotion in political Facebook and Twitter posts. Uses <code>pandas</code> for cleaning, <code>NLTK</code> for sentiment scoring, and <code>matplotlib</code> for visualizing trends by hashtag and account type.</p>
@@ -922,7 +925,7 @@
       var images = [
         'battle.png',
         'wysdom.svg', 'signal.svg', 'agency.svg',
-        '25e.png', 'CHESS-112.png', 'Untitled design (51).png'
+        'hybrid.svg', 'chess.svg', 'social.svg'
       ];
       var lifted = false;
       function reveal() {
