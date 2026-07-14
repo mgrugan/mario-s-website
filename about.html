@@ -1,10 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add('loading');</script>
   <meta charset="UTF-8" />
   <title>About — Mario Grugan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mario Grugan is a Statistics & Data Science student at Carnegie Mellon University, social media lead for Carnegie Mellon Racing, and operator of an Instagram network reaching 15M+ followers and 120M+ monthly impressions — combining statistics, engineering, and social growth." />
+  <meta name="author" content="Mario Grugan" />
+  <link rel="canonical" href="https://mariogrugan.com/about.html" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content="Mario Grugan" />
+  <meta property="og:title" content="About — Mario Grugan" />
+  <meta property="og:description" content="Statistics & Data Science at Carnegie Mellon, social media lead for Carnegie Mellon Racing, and operator of a 15M+ follower Instagram network generating 120M+ monthly impressions." />
+  <meta property="og:url" content="https://mariogrugan.com/about.html" />
+  <meta property="og:image" content="https://mariogrugan.com/school.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About — Mario Grugan" />
+  <meta name="twitter:description" content="Statistics & Data Science at Carnegie Mellon, combining statistics, engineering, and social media growth across a 15M+ follower network." />
+  <meta name="twitter:image" content="https://mariogrugan.com/school.png" />
+
   <link rel="icon" type="image/png" href="favicon.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "url": "https://mariogrugan.com/about.html",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Mario Grugan",
+      "url": "https://mariogrugan.com/",
+      "jobTitle": "Statistics & Data Science Student",
+      "description": "Statistics and Data Science student at Carnegie Mellon University, social media lead for Carnegie Mellon Racing, and operator of an Instagram network reaching 15M+ followers and 120M+ monthly impressions.",
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "Carnegie Mellon University" },
+      "affiliation": { "@type": "CollegeOrUniversity", "name": "Carnegie Mellon University" },
+      "worksFor": { "@type": "Organization", "name": "Carnegie Mellon Racing" },
+      "homeLocation": { "@type": "Place", "name": "Pittsburgh, PA, USA" },
+      "email": "mailto:mgrugan@andrew.cmu.edu",
+      "knowsAbout": ["Statistics", "Data Science", "Machine Learning", "Social Media Growth", "Predictive Modeling", "Content Strategy"],
+      "sameAs": [
+        "https://github.com/mgrugan",
+        "https://mgrugan.github.io/signal/",
+        "https://apps.apple.com/us/app/wysdom-ai/id6756771387"
+      ]
+    }
+  }
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -114,6 +158,18 @@
       text-shadow: 0 1px 4px rgba(0,0,0,0.7);
     }
     .spacer { height: var(--nav-h); }
+
+    /* Image preloader — holds a paper-colored veil until key images are cached,
+       so the nav painting and photo never pop in. JS-only; degrades cleanly. */
+    #page-loader { display: none; }
+    html.loading #page-loader {
+      display: block;
+      position: fixed; inset: 0; z-index: 10000;
+      background: radial-gradient(ellipse at 50% 0%, #ede4cf 0%, #e2d8c1 40%, #cebf9e 100%);
+      opacity: 1;
+      transition: opacity 0.55s ease;
+    }
+    html.loading.ready #page-loader { opacity: 0; pointer-events: none; }
 
     /* === PAGE HEAD with central 3D === */
     .page-head {
@@ -310,6 +366,8 @@
   </style>
 </head>
 <body>
+
+  <div id="page-loader" aria-hidden="true"></div>
 
   <header class="nav-band">
     <div class="nav-band-bg"></div>
@@ -686,6 +744,31 @@
       });
     }, { threshold: 0.4 });
     counters.forEach(c => obs.observe(c));
+
+    /* Image preloader — reveal the page only once key images are cached
+       (with a hard timeout so it can never hang). */
+    (function() {
+      var root = document.documentElement;
+      var images = ['school.png', 'DSC06285 (2).jpg'];
+      var lifted = false;
+      function reveal() {
+        if (lifted) return;
+        lifted = true;
+        root.classList.add('ready');
+      }
+      var remaining = images.length;
+      if (remaining === 0) { reveal(); return; }
+      images.forEach(function(src) {
+        var img = new Image();
+        img.onload = img.onerror = function() {
+          remaining--;
+          if (remaining <= 0) reveal();
+        };
+        img.src = src;
+      });
+      window.addEventListener('load', reveal);   // safety net
+      setTimeout(reveal, 4000);                   // never hang
+    })();
   </script>
 
 </body>

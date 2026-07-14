@@ -1,10 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add('loading');</script>
   <meta charset="UTF-8" />
-  <title>Work — Mario Grugan</title>
+  <title>Work — Projects by Mario Grugan</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Selected work by Mario Grugan: Wysdom AI, an AI-powered study app; Signal, an SEO & GEO audit tool; a 15M+ follower Instagram network; Formula Hybrid optimization in R; an AI chess engine; and NLP social-media analysis." />
+  <meta name="author" content="Mario Grugan" />
+  <link rel="canonical" href="https://mariogrugan.com/portfolio.html" />
   <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mario Grugan" />
+  <meta property="og:title" content="Work — Projects by Mario Grugan" />
+  <meta property="og:description" content="Wysdom AI study app, the Signal SEO/GEO audit tool, a 15M+ follower Instagram network, Formula Hybrid optimization, an AI chess engine, and NLP social analysis." />
+  <meta property="og:url" content="https://mariogrugan.com/portfolio.html" />
+  <meta property="og:image" content="https://mariogrugan.com/battle.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Work — Projects by Mario Grugan" />
+  <meta name="twitter:description" content="Wysdom AI, Signal (SEO/GEO audit tool), a 15M+ follower Instagram network, and data-science projects from Carnegie Mellon." />
+  <meta name="twitter:image" content="https://mariogrugan.com/battle.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Work — Projects by Mario Grugan",
+    "url": "https://mariogrugan.com/portfolio.html",
+    "about": { "@type": "Person", "name": "Mario Grugan", "url": "https://mariogrugan.com/" },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListOrder": "https://schema.org/ItemListOrderDescending",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "Wysdom AI",
+            "applicationCategory": "EducationApplication",
+            "operatingSystem": "iOS, Android, Web",
+            "url": "https://apps.apple.com/us/app/wysdom-ai/id6756771387",
+            "author": { "@type": "Person", "name": "Mario Grugan" },
+            "description": "An AI-powered study platform that turns notes, slides, and study guides into a personalized, infinite feed of active-recall questions. Built with React Native and Expo over an LLM pipeline."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "SoftwareApplication",
+            "name": "Signal",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Web",
+            "url": "https://mgrugan.github.io/signal/",
+            "author": { "@type": "Person", "name": "Mario Grugan" },
+            "description": "A client-side SEO & GEO audit tool that crawls a site and scores it 0–100 for classic search and AI answer engines, then generates an action plan plus robots.txt and llms.txt. Built with vanilla JavaScript and the Google Gemini API."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Social Media Agency",
+            "url": "https://github.com/mgrugan/agency",
+            "author": { "@type": "Person", "name": "Mario Grugan" },
+            "description": "A portfolio of high-growth Instagram accounts totaling 15M+ followers, including @ocean.destinations (5M+), generating 100M+ organic impressions per month."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Formula Hybrid Optimization",
+            "author": { "@type": "Person", "name": "Mario Grugan" },
+            "description": "An R-based study modeling Formula Hybrid / FSAE endurance scoring as a function of lap time and energy use, then numerically optimizing for total points (endurance model R² = 0.988)."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "SoftwareSourceCode",
+            "name": "AI Chess",
+            "programmingLanguage": "Python",
+            "author": { "@type": "Person", "name": "Mario Grugan" },
+            "description": "A full chess engine built from scratch for CMU 15-112, handling the complete rule set with an AI opponent, on cmu_graphics."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
+            "@type": "SoftwareSourceCode",
+            "name": "Social Signals",
+            "programmingLanguage": "Python",
+            "author": { "@type": "Person", "name": "Mario Grugan" },
+            "description": "A Python analysis of bias and emotion in political social-media posts using pandas, NLTK sentiment scoring, and matplotlib."
+          }
+        }
+      ]
+    }
+  }
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -113,6 +214,19 @@
       text-shadow: 0 1px 4px rgba(0,0,0,0.7);
     }
     .spacer { height: var(--nav-h); }
+
+    /* Image preloader — holds a paper-colored veil until key images are cached,
+       so background paintings and thumbnails never pop in mid-animation.
+       Only active when JS is present; degrades to nothing without it. */
+    #page-loader { display: none; }
+    html.loading #page-loader {
+      display: block;
+      position: fixed; inset: 0; z-index: 10000;
+      background: radial-gradient(ellipse at 50% 0%, #ede4cf 0%, #e2d8c1 40%, #cebf9e 100%);
+      opacity: 1;
+      transition: opacity 0.55s ease;
+    }
+    html.loading.ready #page-loader { opacity: 0; pointer-events: none; }
 
     .page-head {
       max-width: 1400px; margin: 0 auto;
@@ -365,6 +479,8 @@
 </head>
 <body>
 
+  <div id="page-loader" aria-hidden="true"></div>
+
   <header class="nav-band">
     <div class="nav-band-bg"></div>
     <nav class="nav">
@@ -390,13 +506,137 @@
       <canvas id="headerCanvas"></canvas>
     </div>
     <div class="page-head-right">
-      <p class="tagline">Three projects in engineering, software, and <em>data analysis</em>.</p>
+      <p class="tagline">Six projects across AI, software, data, and <em>social platforms</em>.</p>
     </div>
   </section>
 
-  <article id="hybrid" class="project">
+  <article id="wysdom" class="project">
     <aside class="project-side">
       <div class="project-num">— 01</div>
+      <div class="meta-block">
+        <div class="meta-label">Year</div>
+        <div class="meta-value">2025</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Discipline</div>
+        <div class="meta-value serif">Software · AI / ML</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Tools</div>
+        <div class="meta-value">React Native · Expo · LLMs</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Platform</div>
+        <div class="meta-value serif">iOS · Android · Web</div>
+      </div>
+    </aside>
+    <div class="project-main">
+      <div class="project-image-wrap tilt-card">
+        <img src="wysdom.svg" alt="Wysdom AI — mobile study feed of active-recall questions" />
+      </div>
+      <h2 class="project-title">Wysdom <em>AI</em></h2>
+      <div class="project-body">
+        <p>Wysdom AI is an AI-powered study platform that turns passive studying into active recall. Students upload class notes, lecture slides, or study guides, and the app converts that material into a personalized, infinite vertical feed of questions — a TikTok-style feed built on proven retrieval-practice techniques for long-term retention. Learners get immediate feedback, revisit weak concepts, and build mastery through continuous active recall.</p>
+        <p>Built with <strong>React Native</strong> and <strong>Expo</strong> for a single codebase across iOS, Android, and web. Uploaded documents are parsed, cleaned, and segmented, then passed through an AI pipeline that summarizes the material, extracts key concepts, maps relationships between topics, and generates multiple-choice questions, flashcards, and open-response prompts. A cloud backend handles progress, analytics, and authentication, while AI inference is tuned to minimize latency and cost.</p>
+      </div>
+      <div class="runbox">
+        <div class="runbox-label">How it works</div>
+        <ol>
+          <li>Upload your notes, lecture slides, or study guides.</li>
+          <li>The AI pipeline summarizes the material and generates multiple-choice questions, flashcards, and open-response prompts.</li>
+          <li>Study through an infinite feed of active-recall questions with immediate feedback and mastery tracking.</li>
+        </ol>
+      </div>
+      <a href="https://apps.apple.com/us/app/wysdom-ai/id6756771387" class="action" target="_blank" rel="noopener">View on the App Store <span class="arrow">→</span></a>
+    </div>
+  </article>
+
+  <article id="signal" class="project">
+    <aside class="project-side">
+      <div class="project-num">— 02</div>
+      <div class="meta-block">
+        <div class="meta-label">Year</div>
+        <div class="meta-value">2026</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Discipline</div>
+        <div class="meta-value serif">Software · SEO / GEO</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Tools</div>
+        <div class="meta-value">JavaScript · Gemini API</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Context</div>
+        <div class="meta-value serif">Static web app</div>
+      </div>
+    </aside>
+    <div class="project-main">
+      <div class="project-image-wrap tilt-card">
+        <img src="signal.svg" alt="Signal — an SEO and GEO readiness audit gauge" />
+      </div>
+      <h2 class="project-title">Signal <em>Audit</em></h2>
+      <div class="project-body">
+        <p>Signal is a browser-based audit tool that scores any website for both classic search (<strong>SEO</strong>) and AI answer engines (<strong>GEO</strong>). It crawls up to 60 internal pages, extracts on-page signals, and produces a deterministic <strong>0–100</strong> score across each dimension — the same input yielding the same result every run.</p>
+        <p>For SEO it measures titles, meta descriptions, heading hierarchy, word count, alt-text, structured data, and links. For GEO it evaluates schema, answer-ready content, fact density, extractable formatting, authority, entity clarity, and AI-crawler access. Google's <strong>Gemini API</strong> generates an action plan — executive summary, quick wins, answer-engine simulations, and prioritized fixes — and Signal auto-generates <code>robots.txt</code> and <code>llms.txt</code>. It runs entirely client-side with no backend, deployed on GitHub Pages.</p>
+      </div>
+      <div class="runbox">
+        <div class="runbox-label">What it checks</div>
+        <ol>
+          <li>SEO signals: metadata, headings, content depth, structured data, media, and technical health.</li>
+          <li>GEO dimensions: schema, answer-ready content, fact density, extractable formatting, authority, entity clarity, and crawler access.</li>
+          <li>Generates an AI action plan plus ready-to-ship <code>robots.txt</code> and <code>llms.txt</code>.</li>
+        </ol>
+      </div>
+      <a href="https://mgrugan.github.io/signal/" class="action" target="_blank" rel="noopener">Open Signal <span class="arrow">→</span></a>
+    </div>
+  </article>
+
+  <article id="agency" class="project">
+    <aside class="project-side">
+      <div class="project-num">— 03</div>
+      <div class="meta-block">
+        <div class="meta-label">Years</div>
+        <div class="meta-value">2017 – Present</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Discipline</div>
+        <div class="meta-value serif">Growth · Analytics</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Tools</div>
+        <div class="meta-value">Content strategy · Analytics</div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-label">Context</div>
+        <div class="meta-value serif">Instagram network</div>
+      </div>
+    </aside>
+    <div class="project-main">
+      <div class="project-image-wrap tilt-card">
+        <img src="agency.svg" alt="Social media network of high-growth Instagram accounts with an organic growth curve" />
+      </div>
+      <h2 class="project-title">Social Media <em>Agency</em></h2>
+      <div class="project-body">
+        <p>A portfolio of high-growth Instagram accounts totaling <strong>15M+ followers</strong> — including <em>@ocean.destinations</em> (5M+) and several other 1M+ pages — generating <strong>100M+ organic impressions</strong> each month.</p>
+        <p>Over 8+ years I've built and scaled these communities through content strategy, audience analytics, and trend forecasting; developed automated content strategies and publishing schedules; analyzed performance metrics; and optimized engagement with data-driven decisions. I've led designers, video editors, and developers to produce high-performing content, and grown multiple accounts from the ground up to 1M+ followers across several niches.</p>
+      </div>
+      <div class="runbox">
+        <div class="runbox-label">Highlights</div>
+        <ol>
+          <li>15M+ followers across the network, including @ocean.destinations (5M+) and multiple 1M+ accounts.</li>
+          <li>100M+ monthly organic impressions built over 8+ years through content strategy and trend forecasting.</li>
+          <li>Automated content strategies, publishing schedules, and data-driven engagement optimization.</li>
+          <li>Grew multiple accounts from zero to 1M+ followers across several niches.</li>
+        </ol>
+      </div>
+      <a href="https://github.com/mgrugan/agency" class="action" target="_blank" rel="noopener">View on GitHub <span class="arrow">→</span></a>
+    </div>
+  </article>
+
+  <article id="hybrid" class="project">
+    <aside class="project-side">
+      <div class="project-num">— 04</div>
       <div class="meta-block">
         <div class="meta-label">Year</div>
         <div class="meta-value">2025</div>
@@ -435,7 +675,7 @@
 
   <article id="chess" class="project">
     <aside class="project-side">
-      <div class="project-num">— 02</div>
+      <div class="project-num">— 05</div>
       <div class="meta-block"><div class="meta-label">Year</div><div class="meta-value">2023</div></div>
       <div class="meta-block"><div class="meta-label">Discipline</div><div class="meta-value serif">Software · Game AI</div></div>
       <div class="meta-block"><div class="meta-label">Tools</div><div class="meta-value">Python · cmu_graphics</div></div>
@@ -461,7 +701,7 @@
 
   <article id="social" class="project">
     <aside class="project-side">
-      <div class="project-num">— 03</div>
+      <div class="project-num">— 06</div>
       <div class="meta-block"><div class="meta-label">Year</div><div class="meta-value">2022</div></div>
       <div class="meta-block"><div class="meta-label">Discipline</div><div class="meta-value serif">Data Analysis · NLP</div></div>
       <div class="meta-block"><div class="meta-label">Tools</div><div class="meta-value">pandas · matplotlib · NLTK</div></div>
@@ -672,6 +912,35 @@
         card.style.transform = 'rotateX(0deg) rotateY(0deg)';
       });
     });
+
+    /* Image preloader — reveal the page only once key images are cached
+       (with a hard timeout so it can never hang). */
+    (function() {
+      var root = document.documentElement;
+      var images = [
+        'battle.png',
+        'wysdom.svg', 'signal.svg', 'agency.svg',
+        '25e.png', 'CHESS-112.png', 'Untitled design (51).png'
+      ];
+      var lifted = false;
+      function reveal() {
+        if (lifted) return;
+        lifted = true;
+        root.classList.add('ready');
+      }
+      var remaining = images.length;
+      if (remaining === 0) { reveal(); return; }
+      images.forEach(function(src) {
+        var img = new Image();
+        img.onload = img.onerror = function() {
+          remaining--;
+          if (remaining <= 0) reveal();
+        };
+        img.src = src;
+      });
+      window.addEventListener('load', reveal);   // safety net
+      setTimeout(reveal, 4000);                   // never hang
+    })();
   </script>
 
 </body>
