@@ -339,7 +339,7 @@
       display: grid;
       grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
       gap: 48px;
-      align-items: center;
+      align-items: stretch;
     }
     /* Alternate the artwork side for visual rhythm */
     .project.reverse .project-image-wrap { order: 2; }
@@ -348,9 +348,13 @@
 
     .project-image-wrap {
       background: #ede4cf;
-      aspect-ratio: 4 / 3;
       width: 100%;
-      display: flex; align-items: center; justify-content: center;
+      /* Stretch to the height of the text column so the plate fills the
+         section instead of leaving empty space beside taller copy. The
+         artwork is absolutely centered so it never dictates the row height. */
+      height: 100%;
+      min-height: 340px;
+      position: relative;
       overflow: hidden;
       margin: 0; padding: 28px;
       transform-style: preserve-3d;
@@ -360,16 +364,18 @@
     }
     .project-image-wrap img {
       /* Cap below 100% so the artwork always keeps a margin inside the plate
-         and never reads as cut off, on any screen size. */
+         and never reads as cut off, on any screen size. As the plate grows
+         taller, the artwork scales up with it. */
+      position: absolute; top: 50%; left: 50%;
       max-width: 86%; max-height: 86%;
       object-fit: contain; mix-blend-mode: multiply;
-      transform: translateZ(50px);
+      transform: translate(-50%, -50%) translateZ(50px);
       transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
     }
     .project-image-wrap:hover {
       box-shadow: 0 40px 80px -30px rgba(26, 22, 18, 0.3), 0 20px 40px -20px rgba(196, 122, 58, 0.2);
     }
-    .project-image-wrap:hover img { transform: translateZ(80px); }
+    .project-image-wrap:hover img { transform: translate(-50%, -50%) translateZ(80px); }
 
     .project-title {
       font-family: 'Cormorant Garamond', serif;
@@ -480,7 +486,7 @@
       }
       .project.reverse .project-image-wrap,
       .project.reverse .project-text { order: 0; }
-      .project-image-wrap { aspect-ratio: 16 / 10; }
+      .project-image-wrap { aspect-ratio: 16 / 10; height: auto; min-height: 0; }
     }
 
     @media (max-width: 900px) {
@@ -514,7 +520,7 @@
       .meta-block { margin-bottom: 0; }
       .project-main { grid-template-columns: 1fr; gap: 24px; max-width: none; perspective: none; }
       .runbox { grid-template-columns: 1fr; gap: 12px; padding: 16px 0; }
-      .project-image-wrap { padding: 22px; aspect-ratio: 4 / 3; }
+      .project-image-wrap { padding: 22px; aspect-ratio: 4 / 3; height: auto; min-height: 0; }
       footer { padding: 30px 22px; flex-direction: column; gap: 14px; }
     }
 
