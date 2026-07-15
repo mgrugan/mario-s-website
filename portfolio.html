@@ -232,12 +232,12 @@
 
     .page-head {
       max-width: 1400px; margin: 0 auto;
-      padding: 80px 56px 50px;
+      padding: 52px 56px 36px;
       display: grid;
-      grid-template-columns: 1fr 380px 1fr;
+      grid-template-columns: 1fr 320px 1fr;
       gap: 40px;
       align-items: center;
-      min-height: 500px;
+      min-height: 360px;
       position: relative; z-index: 2;
     }
     .page-head-left { text-align: right; padding-right: 20px; }
@@ -263,7 +263,7 @@
     .page-3d-wrap {
       position: relative;
       width: 100%; aspect-ratio: 1;
-      max-width: 380px;
+      max-width: 320px;
       filter: drop-shadow(0 16px 50px rgba(139, 58, 26, 0.4));
     }
     .page-3d-wrap canvas {
@@ -298,27 +298,28 @@
     /* === PROJECTS === */
     .project {
       max-width: 1400px; margin: 0 auto;
-      padding: 80px 56px;
+      padding: 52px 56px;
       border-top: 1px solid var(--rule);
       position: relative; z-index: 2;
       display: grid;
-      grid-template-columns: 1fr 7fr;
-      gap: 60px;
+      grid-template-columns: 170px 1fr;
+      gap: 48px;
+      align-items: start;
     }
-    .project:first-of-type { padding-top: 60px; }
+    .project:first-of-type { padding-top: 44px; }
 
     .project-side {
-      position: sticky; top: calc(var(--nav-h) + 30px);
+      position: sticky; top: calc(var(--nav-h) + 24px);
       align-self: start;
       font-size: 12px;
     }
     .project-num {
       font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 22px;
-      color: var(--accent); margin-bottom: 24px;
+      font-style: italic; font-size: 20px;
+      color: var(--accent); margin-bottom: 18px;
       letter-spacing: -0.01em;
     }
-    .meta-block { margin-bottom: 22px; }
+    .meta-block { margin-bottom: 15px; }
     .meta-label {
       letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--muted); font-size: 11px;
@@ -333,14 +334,25 @@
       font-size: 16px; font-style: italic;
     }
 
-    .project-main { min-width: 0; perspective: 1500px; }
+    .project-main {
+      min-width: 0; perspective: 1500px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 48px;
+      align-items: center;
+    }
+    /* Alternate the artwork side for visual rhythm */
+    .project.reverse .project-image-wrap { order: 2; }
+    .project.reverse .project-text { order: 1; }
+    .project-text { min-width: 0; }
+
     .project-image-wrap {
       background: #ede4cf;
-      aspect-ratio: 16 / 10;
-      max-width: 560px;               /* keep the plate compact on desktop */
+      aspect-ratio: 4 / 3;
+      width: 100%;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
-      margin-bottom: 40px; padding: 32px;
+      margin: 0; padding: 28px;
       transform-style: preserve-3d;
       transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1),
                   box-shadow 0.6s ease;
@@ -362,18 +374,19 @@
     .project-title {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
-      font-size: clamp(40px, 5.5vw, 72px);
-      line-height: 1; letter-spacing: -0.025em;
-      color: var(--ink); margin-bottom: 30px;
+      font-size: clamp(32px, 3.6vw, 52px);
+      line-height: 1.02; letter-spacing: -0.025em;
+      color: var(--ink); margin-bottom: 18px;
     }
     .project-title em { font-style: italic; color: var(--accent); }
 
     .project-body {
-      max-width: 720px;
-      font-size: 17px; line-height: 1.65;
-      color: var(--ink-soft); margin-bottom: 40px;
+      max-width: none;
+      font-size: 15.5px; line-height: 1.6;
+      color: var(--ink-soft); margin-bottom: 24px;
     }
-    .project-body p { margin-bottom: 18px; }
+    .project-body p { margin-bottom: 14px; }
+    .project-body p:last-child { margin-bottom: 0; }
     .project-body strong { color: var(--ink); font-weight: 500; }
     .project-body em { color: var(--ink); font-style: italic; }
     .project-body code {
@@ -384,13 +397,13 @@
     }
 
     .runbox {
-      max-width: 720px;
+      max-width: none;
       border-top: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule);
-      padding: 24px 0; margin-bottom: 40px;
+      padding: 18px 0; margin-bottom: 26px;
       display: grid;
-      grid-template-columns: 1fr 3fr;
-      gap: 40px; align-items: start;
+      grid-template-columns: 96px 1fr;
+      gap: 24px; align-items: start;
     }
     .runbox-label {
       font-size: 11px; letter-spacing: 0.14em;
@@ -400,9 +413,9 @@
     .runbox ol { list-style: none; counter-reset: step; padding: 0; }
     .runbox li {
       counter-increment: step;
-      font-size: 15px; line-height: 1.55;
+      font-size: 14px; line-height: 1.5;
       color: var(--ink-soft);
-      padding: 6px 0 6px 36px;
+      padding: 5px 0 5px 34px;
       position: relative;
     }
     .runbox li::before {
@@ -423,9 +436,9 @@
       display: inline-flex; align-items: center; gap: 12px;
       color: var(--ink); text-decoration: none;
       font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 22px;
+      font-style: italic; font-size: 20px;
       letter-spacing: -0.01em;
-      padding: 8px 0;
+      padding: 4px 0;
       border-bottom: 1px solid var(--ink);
       transition: gap 0.3s, color 0.3s, border-color 0.3s;
     }
@@ -455,6 +468,21 @@
       color: var(--ink-soft);
     }
 
+    /* Medium screens: stack artwork above text, keep the meta rail */
+    @media (max-width: 1150px) {
+      .project {
+        grid-template-columns: 150px 1fr;
+        gap: 34px;
+      }
+      .project-main {
+        grid-template-columns: 1fr;
+        gap: 30px; max-width: 660px;
+      }
+      .project.reverse .project-image-wrap,
+      .project.reverse .project-text { order: 0; }
+      .project-image-wrap { aspect-ratio: 16 / 10; }
+    }
+
     @media (max-width: 900px) {
       :root { --nav-h: 90px; }
       .nav { padding: 0 22px; }
@@ -464,21 +492,35 @@
       .painting-credit { left: 22px; font-size: 9px; }
       .page-head {
         grid-template-columns: 1fr;
-        padding: 50px 22px 30px;
-        gap: 30px; min-height: auto;
+        padding: 40px 22px 24px;
+        gap: 26px; min-height: auto;
       }
       .page-head-left, .page-head-right { text-align: center; padding: 0; }
-      .page-3d-wrap { max-width: 260px; margin: 0 auto; }
+      .page-3d-wrap { max-width: 220px; margin: 0 auto; }
       .page-head-right .tagline { max-width: none; }
       .project {
         grid-template-columns: 1fr;
-        gap: 32px; padding: 50px 22px;
+        gap: 24px; padding: 38px 22px;
       }
-      .project-side { position: static; }
-      .runbox { grid-template-columns: 1fr; gap: 14px; padding: 18px 0; }
-      .project-image-wrap { padding: 24px; aspect-ratio: 4 / 3; max-width: none; }
-      .project-main { perspective: none; }
+      .project:first-of-type { padding-top: 34px; }
+      /* Compact the meta into a two-column strip on mobile */
+      .project-side {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px 24px;
+      }
+      .project-num { grid-column: 1 / -1; margin-bottom: 0; }
+      .meta-block { margin-bottom: 0; }
+      .project-main { grid-template-columns: 1fr; gap: 24px; max-width: none; perspective: none; }
+      .runbox { grid-template-columns: 1fr; gap: 12px; padding: 16px 0; }
+      .project-image-wrap { padding: 22px; aspect-ratio: 4 / 3; }
       footer { padding: 30px 22px; flex-direction: column; gap: 14px; }
+    }
+
+    @media (max-width: 460px) {
+      .project-side { grid-template-columns: 1fr; }
+      .project-num { margin-bottom: 4px; }
     }
   </style>
 </head>
@@ -539,6 +581,7 @@
       <div class="project-image-wrap tilt-card">
         <img src="wysdom.svg" alt="Wysdom AI — mobile study feed of active-recall questions" />
       </div>
+      <div class="project-text">
       <h2 class="project-title">Wysdom <em>AI</em></h2>
       <div class="project-body">
         <p>Wysdom AI is an AI-powered study platform that turns passive studying into active recall. Students upload class notes, lecture slides, or study guides, and the app converts that material into a personalized, infinite vertical feed of questions — a TikTok-style feed built on proven retrieval-practice techniques for long-term retention. Learners get immediate feedback, revisit weak concepts, and build mastery through continuous active recall.</p>
@@ -553,10 +596,11 @@
         </ol>
       </div>
       <a href="https://apps.apple.com/us/app/wysdom-ai/id6756771387" class="action" target="_blank" rel="noopener">View on the App Store <span class="arrow">→</span></a>
+      </div>
     </div>
   </article>
 
-  <article id="signal" class="project">
+  <article id="signal" class="project reverse">
     <aside class="project-side">
       <div class="project-num">— 02</div>
       <div class="meta-block">
@@ -580,6 +624,7 @@
       <div class="project-image-wrap tilt-card">
         <img src="signal.svg" alt="Signal — an SEO and GEO readiness audit gauge" />
       </div>
+      <div class="project-text">
       <h2 class="project-title">Signal <em>Audit</em></h2>
       <div class="project-body">
         <p>Signal is a browser-based audit tool that scores any website for both classic search (<strong>SEO</strong>) and AI answer engines (<strong>GEO</strong>). It crawls up to 60 internal pages, extracts on-page signals, and produces a deterministic <strong>0–100</strong> score across each dimension — the same input yielding the same result every run.</p>
@@ -594,6 +639,7 @@
         </ol>
       </div>
       <a href="https://mgrugan.github.io/signal/" class="action" target="_blank" rel="noopener">Open Signal <span class="arrow">→</span></a>
+      </div>
     </div>
   </article>
 
@@ -621,6 +667,7 @@
       <div class="project-image-wrap tilt-card">
         <img src="agency.svg" alt="Social media network of high-growth Instagram accounts with an organic growth curve" />
       </div>
+      <div class="project-text">
       <h2 class="project-title">Social Media <em>Agency</em></h2>
       <div class="project-body">
         <p>A portfolio of high-growth Instagram accounts totaling <strong>15M+ followers</strong> — including <em>@ocean.destinations</em> (5M+) and several other 1M+ pages — generating <strong>100M+ organic impressions</strong> each month.</p>
@@ -636,10 +683,11 @@
         </ol>
       </div>
       <a href="https://github.com/mgrugan/agency" class="action" target="_blank" rel="noopener">View on GitHub <span class="arrow">→</span></a>
+      </div>
     </div>
   </article>
 
-  <article id="hybrid" class="project">
+  <article id="hybrid" class="project reverse">
     <aside class="project-side">
       <div class="project-num">— 04</div>
       <div class="meta-block">
@@ -663,6 +711,7 @@
       <div class="project-image-wrap tilt-card">
         <img src="hybrid.svg" alt="Formula Hybrid optimization — regression scatter with a fitted line and a marked optimum" />
       </div>
+      <div class="project-text">
       <h2 class="project-title">Formula Hybrid <em>Optimization</em></h2>
       <div class="project-body">
         <p>An R-based study of Formula Hybrid and FSAE endurance data that models total scoring as a function of lap time and energy usage. Two linear models — one for efficiency, one for endurance — are combined into a single objective, then numerically optimized to find the lap time and energy draw that maximize total points.</p>
@@ -675,6 +724,7 @@
         </ol>
       </div>
       <a href="CMR Data (1).pdf" class="action" download>Download PDF <span class="arrow">↓</span></a>
+      </div>
     </div>
   </article>
 
@@ -688,6 +738,7 @@
     </aside>
     <div class="project-main">
       <div class="project-image-wrap tilt-card"><img src="chess.svg" alt="AI Chess — a board with a knight's L-move and a minimax decision branch" /></div>
+      <div class="project-text">
       <h2 class="project-title">AI <em>Chess</em></h2>
       <div class="project-body">
         <p>A full chess engine built from scratch for CMU's 15-112 course. Handles the complete rule set — castling, en passant, promotion, check, checkmate, and stalemate — with an AI opponent that prioritizes capturing high-value pieces. Built on <code>cmu_graphics</code> with a menu-driven interface.</p>
@@ -701,10 +752,11 @@
         </ol>
       </div>
       <a href="https://github.com/mgrugan/chess112" class="action" target="_blank" rel="noopener">View on GitHub <span class="arrow">→</span></a>
+      </div>
     </div>
   </article>
 
-  <article id="social" class="project">
+  <article id="social" class="project reverse">
     <aside class="project-side">
       <div class="project-num">— 06</div>
       <div class="meta-block"><div class="meta-label">Year</div><div class="meta-value">2022</div></div>
@@ -714,6 +766,7 @@
     </aside>
     <div class="project-main">
       <div class="project-image-wrap tilt-card"><img src="social.svg" alt="Social Signals — speech bubbles and a sentiment distribution of political posts" /></div>
+      <div class="project-text">
       <h2 class="project-title">Social <em>Signals</em></h2>
       <div class="project-body">
         <p>A Python-based analysis of bias and emotion in political Facebook and Twitter posts. Uses <code>pandas</code> for cleaning, <code>NLTK</code> for sentiment scoring, and <code>matplotlib</code> for visualizing trends by hashtag and account type.</p>
@@ -727,6 +780,7 @@
         </ol>
       </div>
       <a href="https://github.com/mgrugan/15110-Social-Media-Analysis" class="action" target="_blank" rel="noopener">View on GitHub <span class="arrow">→</span></a>
+      </div>
     </div>
   </article>
 
