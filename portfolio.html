@@ -298,15 +298,15 @@
     /* === PROJECTS === */
     .project {
       max-width: 1400px; margin: 0 auto;
-      padding: 38px 56px;
+      padding: 28px 56px;
       border-top: 1px solid var(--rule);
       position: relative; z-index: 2;
       display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 44px;
+      grid-template-columns: 140px 1fr;
+      gap: 40px;
       align-items: start;
     }
-    .project:first-of-type { padding-top: 34px; }
+    .project:first-of-type { padding-top: 28px; }
 
     .project-side {
       position: sticky; top: calc(var(--nav-h) + 24px);
@@ -315,11 +315,12 @@
     }
     .project-num {
       font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 20px;
-      color: var(--accent); margin-bottom: 18px;
+      font-style: italic; font-size: 19px;
+      color: var(--accent); margin-bottom: 12px;
       letter-spacing: -0.01em;
     }
-    .meta-block { margin-bottom: 15px; }
+    .meta-block { margin-bottom: 11px; }
+    .meta-label { margin-bottom: 4px; }
     .meta-label {
       letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--muted); font-size: 11px;
@@ -353,10 +354,10 @@
          section instead of leaving empty space beside taller copy. The
          artwork is absolutely centered so it never dictates the row height. */
       height: 100%;
-      min-height: 300px;
+      min-height: 260px;
       position: relative;
       overflow: hidden;
-      margin: 0; padding: 26px;
+      margin: 0; padding: 24px;
       transform-style: preserve-3d;
       transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1),
                   box-shadow 0.6s ease;
@@ -380,18 +381,18 @@
     .project-title {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
-      font-size: clamp(30px, 3vw, 44px);
-      line-height: 1.03; letter-spacing: -0.025em;
-      color: var(--ink); margin-bottom: 13px;
+      font-size: clamp(28px, 2.7vw, 40px);
+      line-height: 1.02; letter-spacing: -0.025em;
+      color: var(--ink); margin-bottom: 10px;
     }
     .project-title em { font-style: italic; color: var(--accent); }
 
     .project-body {
       max-width: none;
-      font-size: 14.5px; line-height: 1.5;
-      color: var(--ink-soft); margin-bottom: 18px;
+      font-size: 14px; line-height: 1.45;
+      color: var(--ink-soft); margin-bottom: 14px;
     }
-    .project-body p { margin-bottom: 10px; }
+    .project-body p { margin-bottom: 8px; }
     .project-body p:last-child { margin-bottom: 0; }
     .project-body strong { color: var(--ink); font-weight: 500; }
     .project-body em { color: var(--ink); font-style: italic; }
@@ -406,10 +407,10 @@
       max-width: none;
       border-top: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule);
-      padding: 14px 0; margin-bottom: 18px;
+      padding: 12px 0; margin-bottom: 14px;
       display: grid;
-      grid-template-columns: 92px 1fr;
-      gap: 24px; align-items: start;
+      grid-template-columns: 88px 1fr;
+      gap: 20px; align-items: start;
     }
     .runbox-label {
       font-size: 11px; letter-spacing: 0.14em;
@@ -419,9 +420,9 @@
     .runbox ol { list-style: none; counter-reset: step; padding: 0; }
     .runbox li {
       counter-increment: step;
-      font-size: 13.5px; line-height: 1.45;
+      font-size: 13px; line-height: 1.4;
       color: var(--ink-soft);
-      padding: 4px 0 4px 32px;
+      padding: 3px 0 3px 30px;
       position: relative;
     }
     .runbox li::before {
@@ -442,9 +443,9 @@
       display: inline-flex; align-items: center; gap: 12px;
       color: var(--ink); text-decoration: none;
       font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 19px;
+      font-style: italic; font-size: 18px;
       letter-spacing: -0.01em;
-      padding: 2px 0;
+      padding: 1px 0;
       border-bottom: 1px solid var(--ink);
       transition: gap 0.3s, color 0.3s, border-color 0.3s;
     }
