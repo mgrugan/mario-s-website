@@ -298,15 +298,15 @@
     /* === PROJECTS === */
     .project {
       max-width: 1400px; margin: 0 auto;
-      padding: 52px 56px;
+      padding: 38px 56px;
       border-top: 1px solid var(--rule);
       position: relative; z-index: 2;
       display: grid;
-      grid-template-columns: 170px 1fr;
-      gap: 48px;
+      grid-template-columns: 150px 1fr;
+      gap: 44px;
       align-items: start;
     }
-    .project:first-of-type { padding-top: 44px; }
+    .project:first-of-type { padding-top: 34px; }
 
     .project-side {
       position: sticky; top: calc(var(--nav-h) + 24px);
@@ -337,8 +337,8 @@
     .project-main {
       min-width: 0; perspective: 1500px;
       display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-      gap: 48px;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 40px;
       align-items: stretch;
     }
     /* Alternate the artwork side for visual rhythm */
@@ -353,10 +353,10 @@
          section instead of leaving empty space beside taller copy. The
          artwork is absolutely centered so it never dictates the row height. */
       height: 100%;
-      min-height: 340px;
+      min-height: 300px;
       position: relative;
       overflow: hidden;
-      margin: 0; padding: 28px;
+      margin: 0; padding: 26px;
       transform-style: preserve-3d;
       transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1),
                   box-shadow 0.6s ease;
@@ -380,18 +380,18 @@
     .project-title {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 400;
-      font-size: clamp(32px, 3.6vw, 52px);
-      line-height: 1.02; letter-spacing: -0.025em;
-      color: var(--ink); margin-bottom: 18px;
+      font-size: clamp(30px, 3vw, 44px);
+      line-height: 1.03; letter-spacing: -0.025em;
+      color: var(--ink); margin-bottom: 13px;
     }
     .project-title em { font-style: italic; color: var(--accent); }
 
     .project-body {
       max-width: none;
-      font-size: 15.5px; line-height: 1.6;
-      color: var(--ink-soft); margin-bottom: 24px;
+      font-size: 14.5px; line-height: 1.5;
+      color: var(--ink-soft); margin-bottom: 18px;
     }
-    .project-body p { margin-bottom: 14px; }
+    .project-body p { margin-bottom: 10px; }
     .project-body p:last-child { margin-bottom: 0; }
     .project-body strong { color: var(--ink); font-weight: 500; }
     .project-body em { color: var(--ink); font-style: italic; }
@@ -406,9 +406,9 @@
       max-width: none;
       border-top: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule);
-      padding: 18px 0; margin-bottom: 26px;
+      padding: 14px 0; margin-bottom: 18px;
       display: grid;
-      grid-template-columns: 96px 1fr;
+      grid-template-columns: 92px 1fr;
       gap: 24px; align-items: start;
     }
     .runbox-label {
@@ -419,9 +419,9 @@
     .runbox ol { list-style: none; counter-reset: step; padding: 0; }
     .runbox li {
       counter-increment: step;
-      font-size: 14px; line-height: 1.5;
+      font-size: 13.5px; line-height: 1.45;
       color: var(--ink-soft);
-      padding: 5px 0 5px 34px;
+      padding: 4px 0 4px 32px;
       position: relative;
     }
     .runbox li::before {
@@ -442,9 +442,9 @@
       display: inline-flex; align-items: center; gap: 12px;
       color: var(--ink); text-decoration: none;
       font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 20px;
+      font-style: italic; font-size: 19px;
       letter-spacing: -0.01em;
-      padding: 4px 0;
+      padding: 2px 0;
       border-bottom: 1px solid var(--ink);
       transition: gap 0.3s, color 0.3s, border-color 0.3s;
     }
