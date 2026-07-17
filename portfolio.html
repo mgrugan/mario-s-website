@@ -354,7 +354,10 @@
          section instead of leaving empty space beside taller copy. The
          artwork is absolutely centered so it never dictates the row height. */
       height: 100%;
-      min-height: 260px;
+      /* This min-height governs every project's row height. Each project's
+         text is kept shorter than this, so all projects render at exactly
+         the same height (plate + section padding). */
+      min-height: 320px;
       position: relative;
       overflow: hidden;
       margin: 0; padding: 24px;
@@ -591,14 +594,14 @@
       <div class="project-text">
       <h2 class="project-title">Wysdom <em>AI</em></h2>
       <div class="project-body">
-        <p>Wysdom AI turns passive studying into active recall: students upload notes, slides, or study guides, and the app converts them into a personalized, infinite feed of questions — a TikTok-style feed built on proven retrieval-practice techniques for long-term retention. Built with <strong>React Native</strong> and <strong>Expo</strong> for one codebase across iOS, Android, and web, over an AI pipeline that summarizes material and generates multiple-choice questions, flashcards, and open-response prompts.</p>
+        <p>Wysdom AI turns passive studying into active recall: upload notes or slides and it builds a personalized, infinite feed of questions in a TikTok-style format. Built with <strong>React Native</strong> and <strong>Expo</strong> over an AI pipeline that generates quizzes, flashcards, and open-response prompts.</p>
       </div>
       <div class="runbox">
         <div class="runbox-label">How it works</div>
         <ol>
-          <li>Upload your notes, lecture slides, or study guides.</li>
-          <li>The AI pipeline summarizes the material and generates multiple-choice questions, flashcards, and open-response prompts.</li>
-          <li>Study through an infinite feed of active-recall questions with immediate feedback and mastery tracking.</li>
+          <li>Upload your notes, slides, or study guides.</li>
+          <li>The AI generates quizzes, flashcards, and prompts.</li>
+          <li>Study an infinite feed with instant feedback.</li>
         </ol>
       </div>
       <a href="https://apps.apple.com/us/app/wysdom-ai/id6756771387" class="action" target="_blank" rel="noopener">View on the App Store <span class="arrow">→</span></a>
@@ -633,14 +636,14 @@
       <div class="project-text">
       <h2 class="project-title">Signal <em>Audit</em></h2>
       <div class="project-body">
-        <p>Signal is a browser-based tool that scores any website for both classic search (<strong>SEO</strong>) and AI answer engines (<strong>GEO</strong>). It crawls up to 60 pages and produces a deterministic <strong>0–100</strong> score across each dimension. Google's <strong>Gemini API</strong> generates an action plan, and Signal auto-generates <code>robots.txt</code> and <code>llms.txt</code>, running entirely client-side with no backend.</p>
+        <p>Signal scores any website for classic search (<strong>SEO</strong>) and AI answer engines (<strong>GEO</strong>), producing a deterministic <strong>0–100</strong> score. Google's <strong>Gemini API</strong> writes an action plan, plus auto-generated <code>robots.txt</code> and <code>llms.txt</code>.</p>
       </div>
       <div class="runbox">
         <div class="runbox-label">What it checks</div>
         <ol>
-          <li>SEO signals: metadata, headings, content depth, and structured data.</li>
-          <li>GEO dimensions: schema, answer-ready content, authority, and crawler access.</li>
-          <li>Generates an AI action plan plus ready-to-ship <code>robots.txt</code> and <code>llms.txt</code>.</li>
+          <li>SEO: metadata, headings, structured data.</li>
+          <li>GEO: schema, authority, crawler access.</li>
+          <li>Outputs a plan, <code>robots.txt</code>, and <code>llms.txt</code>.</li>
         </ol>
       </div>
       <a href="https://mgrugan.github.io/signal/" class="action" target="_blank" rel="noopener">Open Signal <span class="arrow">→</span></a>
@@ -675,14 +678,14 @@
       <div class="project-text">
       <h2 class="project-title">Social Media <em>Agency</em></h2>
       <div class="project-body">
-        <p>A portfolio of high-growth Instagram accounts totaling <strong>15M+ followers</strong> — including <em>@ocean.destinations</em> (5M+) and several other 1M+ pages — generating <strong>100M+ organic impressions</strong> each month. Over 8+ years I've scaled these communities through content strategy, audience analytics, and trend forecasting, growing multiple accounts from zero to 1M+ followers across several niches.</p>
+        <p>A portfolio of high-growth Instagram accounts totaling <strong>15M+ followers</strong> — including <em>@ocean.destinations</em> (5M+) — generating <strong>100M+ organic impressions</strong> monthly, built over 8+ years through content strategy, audience analytics, and trend forecasting.</p>
       </div>
       <div class="runbox">
         <div class="runbox-label">Highlights</div>
         <ol>
-          <li>15M+ followers across the network, including @ocean.destinations (5M+) and multiple 1M+ accounts.</li>
-          <li>100M+ monthly organic impressions built over 8+ years through content strategy and trend forecasting.</li>
-          <li>Automated content strategies, publishing schedules, and data-driven engagement optimization.</li>
+          <li>15M+ followers, including @ocean.destinations (5M+).</li>
+          <li>100M+ monthly organic impressions over 8+ years.</li>
+          <li>Grew multiple accounts from zero to 1M+.</li>
         </ol>
       </div>
       <a href="https://github.com/mgrugan/agency" class="action" target="_blank" rel="noopener">View on GitHub <span class="arrow">→</span></a>
@@ -717,12 +720,12 @@
       <div class="project-text">
       <h2 class="project-title">Formula Hybrid <em>Optimization</em></h2>
       <div class="project-body">
-        <p>An R-based study of Formula Hybrid and FSAE endurance data that models total scoring as a function of lap time and energy usage. Two linear models — efficiency and endurance — combine into a single objective, then numerically optimized to maximize total points. The endurance model achieved <strong>R² = 0.988</strong>, making it a useful planning tool for trading pace against energy budget.</p>
+        <p>An R-based study of Formula Hybrid / FSAE endurance data modeling total score against lap time and energy use. Two linear models combine into one objective, optimized to maximize points — endurance fit <strong>R² = 0.988</strong>.</p>
       </div>
       <div class="runbox">
         <div class="runbox-label">To read</div>
         <ol>
-          <li>Download the PDF and open in any reader. All code, output, and plots are inline.</li>
+          <li>Download the PDF — code, output, and plots are inline.</li>
         </ol>
       </div>
       <a href="CMR Data (1).pdf" class="action" download>Download PDF <span class="arrow">↓</span></a>
@@ -771,14 +774,14 @@
       <div class="project-text">
       <h2 class="project-title">Social <em>Signals</em></h2>
       <div class="project-body">
-        <p>A Python-based analysis of bias and emotion in political Facebook and Twitter posts. Uses <code>pandas</code> for cleaning, <code>NLTK</code> for sentiment scoring, and <code>matplotlib</code> for visualizing trends by hashtag and account type.</p>
+        <p>A Python analysis of bias and emotion in political social-media posts — <code>pandas</code> for cleaning, <code>NLTK</code> for sentiment scoring, and <code>matplotlib</code> to visualize trends by hashtag.</p>
       </div>
       <div class="runbox">
         <div class="runbox-label">To run</div>
         <ol>
-          <li>Install dependencies: <code>pandas</code>, <code>matplotlib</code>, <code>nltk</code>.</li>
+          <li>Install <code>pandas</code>, <code>matplotlib</code>, and <code>nltk</code>.</li>
           <li>Run <code>hw6_social.py</code>.</li>
-          <li>Call <code>runWeek1()</code>, <code>runWeek2()</code>, etc. for modular analysis.</li>
+          <li>Call <code>runWeek1()</code>, <code>runWeek2()</code>, etc.</li>
         </ol>
       </div>
       <a href="https://github.com/mgrugan/15110-Social-Media-Analysis" class="action" target="_blank" rel="noopener">View on GitHub <span class="arrow">→</span></a>
