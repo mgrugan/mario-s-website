@@ -342,7 +342,12 @@
       gap: 40px;
       align-items: start;
     }
-    /* Alternate the artwork side for visual rhythm */
+    /* Alternate the artwork side for visual rhythm. Flip the column widths
+       too, so the image always sits in the narrow column (same width on
+       both sides) and the text always in the wide column — just mirrored. */
+    .project.reverse .project-main {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    }
     .project.reverse .project-image-wrap { order: 2; }
     .project.reverse .project-text { order: 1; }
     .project-text { min-width: 0; }
@@ -483,6 +488,7 @@
         grid-template-columns: 1fr;
         gap: 30px; max-width: 660px;
       }
+      .project.reverse .project-main { grid-template-columns: 1fr; }
       .project.reverse .project-image-wrap,
       .project.reverse .project-text { order: 0; }
       .project-image-wrap { aspect-ratio: 16 / 10; height: auto; min-height: 0; }
