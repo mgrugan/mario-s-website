@@ -340,7 +340,7 @@
       display: grid;
       grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
       gap: 40px;
-      align-items: stretch;
+      align-items: start;
     }
     /* Alternate the artwork side for visual rhythm */
     .project.reverse .project-image-wrap { order: 2; }
@@ -350,14 +350,9 @@
     .project-image-wrap {
       background: #ede4cf;
       width: 100%;
-      /* Stretch to the height of the text column so the plate fills the
-         section instead of leaving empty space beside taller copy. The
-         artwork is absolutely centered so it never dictates the row height. */
-      height: 100%;
-      /* This min-height governs every project's row height. Each project's
-         text is kept shorter than this, so all projects render at exactly
-         the same height (plate + section padding). */
-      min-height: 320px;
+      /* Fixed height so every project's image plate is exactly the same
+         size, at every viewport width, regardless of the text beside it. */
+      height: 350px;
       position: relative;
       overflow: hidden;
       margin: 0; padding: 24px;
@@ -636,14 +631,14 @@
       <div class="project-text">
       <h2 class="project-title">Signal <em>Audit</em></h2>
       <div class="project-body">
-        <p>Signal scores any website for classic search (<strong>SEO</strong>) and AI answer engines (<strong>GEO</strong>), producing a deterministic <strong>0–100</strong> score. Google's <strong>Gemini API</strong> writes an action plan, plus auto-generated <code>robots.txt</code> and <code>llms.txt</code>.</p>
+        <p>Signal scores any website for classic search (<strong>SEO</strong>) and AI answer engines (<strong>GEO</strong>), returning a deterministic <strong>0–100</strong> score plus a <strong>Gemini</strong>-written action plan.</p>
       </div>
       <div class="runbox">
         <div class="runbox-label">What it checks</div>
         <ol>
           <li>SEO: metadata, headings, structured data.</li>
           <li>GEO: schema, authority, crawler access.</li>
-          <li>Outputs a plan, <code>robots.txt</code>, and <code>llms.txt</code>.</li>
+          <li>Outputs a plan plus <code>robots.txt</code> / <code>llms.txt</code>.</li>
         </ol>
       </div>
       <a href="https://mgrugan.github.io/signal/" class="action" target="_blank" rel="noopener">Open Signal <span class="arrow">→</span></a>
