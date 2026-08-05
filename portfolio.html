@@ -74,6 +74,32 @@
           "@type": "ListItem",
           "position": 4,
           "item": {
+            "@type": "SoftwareApplication",
+            "name": "AI Detector",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Web",
+            "url": "https://aichecker-t41h.onrender.com/",
+            "author": { "@type": "Person", "name": "Mario Grugan" },
+            "description": "An AI-writing detector trained on 500,000 human- and AI-written essays. A Python machine-learning pipeline using decision trees and ensemble models scores any text on how likely it is to be AI-generated."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "WebApplication",
+            "name": "Map of God",
+            "applicationCategory": "Reference",
+            "operatingSystem": "Web",
+            "url": "https://mgrugan.github.io/mapofgod/",
+            "author": { "@type": "Person", "name": "Mario Grugan" },
+            "description": "A cinematic 3D atlas of ~25,000 real stars from the HYG database, rendered in the browser with three.js. Fly through a cosmic web and dive into any star to see its real confirmed exoplanets on orbital rings."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "item": {
             "@type": "CreativeWork",
             "name": "Formula Hybrid Optimization",
             "author": { "@type": "Person", "name": "Mario Grugan" },
@@ -82,7 +108,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 5,
+          "position": 7,
           "item": {
             "@type": "SoftwareSourceCode",
             "name": "AI Chess",
@@ -94,7 +120,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 6,
+          "position": 8,
           "item": {
             "@type": "SoftwareSourceCode",
             "name": "Social Signals",
@@ -565,7 +591,7 @@
       <canvas id="headerCanvas"></canvas>
     </div>
     <div class="page-head-right">
-      <p class="tagline">Six projects across AI, software, data, and <em>social platforms</em>.</p>
+      <p class="tagline">Eight projects across AI, software, data, and <em>social platforms</em>.</p>
     </div>
   </section>
 
@@ -695,9 +721,65 @@
     </div>
   </article>
 
-  <article id="hybrid" class="project reverse">
+  <article id="aidetector" class="project reverse">
     <aside class="project-side">
       <div class="project-num">— 04</div>
+      <div class="meta-block"><div class="meta-label">Year</div><div class="meta-value">2026</div></div>
+      <div class="meta-block"><div class="meta-label">Discipline</div><div class="meta-value serif">Software · ML</div></div>
+      <div class="meta-block"><div class="meta-label">Tools</div><div class="meta-value">Python · Decision Trees</div></div>
+      <div class="meta-block"><div class="meta-label">Context</div><div class="meta-value serif">Web app</div></div>
+    </aside>
+    <div class="project-main">
+      <div class="project-image-wrap tilt-card"><img src="aichecker.svg" alt="AI Detector — an essay classified by a decision tree into human or AI writing" /></div>
+      <div class="project-text">
+      <h2 class="project-title">AI <em>Detector</em></h2>
+      <div class="project-body">
+        <p>An AI-writing detector trained on <strong>500,000</strong> human- and AI-written essays. A Python machine-learning pipeline — decision trees and ensemble models — learns the stylistic signals that separate the two, then scores any pasted text on how likely it is to be AI-generated.</p>
+      </div>
+      <div class="runbox">
+        <div class="runbox-label">How it works</div>
+        <ol>
+          <li>Paste any essay or block of text into the app.</li>
+          <li>Decision-tree models score it for AI-generated likelihood.</li>
+          <li>Trained on 500K labeled human and AI essays.</li>
+        </ol>
+      </div>
+      <a href="https://aichecker-t41h.onrender.com/" class="action" target="_blank" rel="noopener">Open the Detector <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </article>
+
+  <article id="mapofgod" class="project">
+    <aside class="project-side">
+      <div class="project-num">— 05</div>
+      <div class="meta-block"><div class="meta-label">Year</div><div class="meta-value">2026</div></div>
+      <div class="meta-block"><div class="meta-label">Discipline</div><div class="meta-value serif">Creative Coding</div></div>
+      <div class="meta-block"><div class="meta-label">Tools</div><div class="meta-value">three.js · WebGL</div></div>
+      <div class="meta-block"><div class="meta-label">Context</div><div class="meta-value serif">Static site</div></div>
+    </aside>
+    <div class="project-main">
+      <div class="project-image-wrap tilt-card"><img src="mapofgod.svg" alt="Map of God — a 3D atlas of real stars woven into a cosmic web, with a planetary system" /></div>
+      <div class="project-text">
+      <h2 class="project-title">Map of <em>God</em></h2>
+      <div class="project-body">
+        <p>A cinematic 3D atlas of ~<strong>25,000</strong> real stars, built from the HYG astronomical database and rendered in the browser with <strong>three.js</strong> and bloom. Fly through a glowing cosmic web, then dive into any star to watch its real confirmed exoplanets circle it on clean orbital rings.</p>
+      </div>
+      <div class="runbox">
+        <div class="runbox-label">Explore</div>
+        <ol>
+          <li>Drag to orbit the star field; scroll to fly through it.</li>
+          <li>Click any star to dive into its real planetary system.</li>
+          <li>Search real systems — TRAPPIST-1, Kepler-90, Betelgeuse.</li>
+        </ol>
+      </div>
+      <a href="https://mgrugan.github.io/mapofgod/" class="action" target="_blank" rel="noopener">Explore the map <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </article>
+
+  <article id="hybrid" class="project reverse">
+    <aside class="project-side">
+      <div class="project-num">— 06</div>
       <div class="meta-block">
         <div class="meta-label">Year</div>
         <div class="meta-value">2025</div>
@@ -737,7 +819,7 @@
 
   <article id="chess" class="project">
     <aside class="project-side">
-      <div class="project-num">— 05</div>
+      <div class="project-num">— 07</div>
       <div class="meta-block"><div class="meta-label">Year</div><div class="meta-value">2023</div></div>
       <div class="meta-block"><div class="meta-label">Discipline</div><div class="meta-value serif">Software · Game AI</div></div>
       <div class="meta-block"><div class="meta-label">Tools</div><div class="meta-value">Python · cmu_graphics</div></div>
@@ -765,7 +847,7 @@
 
   <article id="social" class="project reverse">
     <aside class="project-side">
-      <div class="project-num">— 06</div>
+      <div class="project-num">— 08</div>
       <div class="meta-block"><div class="meta-label">Year</div><div class="meta-value">2022</div></div>
       <div class="meta-block"><div class="meta-label">Discipline</div><div class="meta-value serif">Data Analysis · NLP</div></div>
       <div class="meta-block"><div class="meta-label">Tools</div><div class="meta-value">pandas · matplotlib · NLTK</div></div>
@@ -986,6 +1068,7 @@
       var images = [
         'battle.png',
         'wysdom.svg', 'signal.svg', 'agency.svg',
+        'aichecker.svg', 'mapofgod.svg',
         'hybrid.svg', 'chess.svg', 'social.svg'
       ];
       var lifted = false;
